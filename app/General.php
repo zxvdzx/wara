@@ -15,6 +15,7 @@ class General
      */
     public static function hasAccess($permissions, $any = false)
     {
+        
         $method = 'hasAccess';
         if ($any) {
             $method = 'hasAnyAccess';
