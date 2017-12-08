@@ -19,11 +19,11 @@ class DashboardController extends Controller
     
     private $dashboard_repository;
 
-    // public function __construct(DashboardRepository $dashboard_repository)
-    // {
-    //     // $this->middleware('sentinel_access:dashboard');
-    //     $this->dashboard_repository = $dashboard_repository;
-    // }
+    public function __construct(DashboardRepository $dashboard_repository)
+    {
+        // $this->middleware('sentinel_access:dashboard');
+        $this->dashboard_repository = $dashboard_repository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -34,8 +34,7 @@ class DashboardController extends Controller
     {
         try
         {
-            $index = view('frontend.dashboard');
-            // $index = $this->dashboard_repository->getIndex();
+            $index = $this->dashboard_repository->getIndex();
         }
         catch (\Exception $e) 
         {
