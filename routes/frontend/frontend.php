@@ -11,11 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::group(['prefix' => 'ganteng', 'namespace' => 'Frontend'], function () { 
-    #-- Dashboard
+Route::group(['namespace' => 'Frontend'], function () { 
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
 });
