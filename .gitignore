@@ -9,5 +9,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
-.composer.lock
+composer.lock
 index.php
