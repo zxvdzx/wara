@@ -1,154 +1,145 @@
-$(document).ready(function(){
-
-	//Code to center the content div
-	$box = $('.content');
-	$ht = $box.height()+175;
-	$win_ht = $(window).height();
-
-	if ($win_ht>$ht) {
-		$box.css({
-			'left' : '50%',
-			'top' : '50%',
-			'margin-left' : -$box.width()/2 + 'px',
-			'margin-top' : -$ht/2 + 'px'
-		});
-	}else{
-		$box.css({
-			'left' : '50%',
-			'margin-left' : -$box.width()/2 + 'px',
-			'margin-top' : '60px',
-			'margin-bottom' : '60px'
-		});
-	}
-
-
-
-
-
+;(function () {
 	
-	//code for the background slider
-	$.backstretch([
-      "img/bg_img.jpg",
-      "img/bg_img2.jpg",
-      "img/bg_img3.jpg"
-    ], {
-        fade: 750,
-        duration: 2500
-    });
+	'use strict';
 
+	// iPad and iPod detection	
+	var isiPad = function(){
+		return (navigator.platform.indexOf("iPad") != -1);
+	};
 
+	var isiPhone = function(){
+	    return (
+			(navigator.platform.indexOf("iPhone") != -1) || 
+			(navigator.platform.indexOf("iPod") != -1)
+	    );
+	};
 
+	var mobileMenuOutsideClick = function() {
 
+		$(document).click(function (e) {
+	    var container = $("#fh5co-offcanvas, .js-fh5co-nav-toggle");
+	    if (!container.is(e.target) && container.has(e.target).length === 0) {
 
-	
- 	//code for the cerlces Countdouwn
-	$(".counter").TimeCircles({
-	    "direction": "Clockwise",
-	    "animation": "Tricks",
-	    "bg_width": 0,
-	    "fg_width": 0.01,
-	    "circle_bg_color": "rgba(255, 255, 255, 0)",
-	    "circle_bg_fill_color": "rgba(255, 255, 255, 0.1)",
-	    "time": {
-	        "Days": {
-	            "text": "Days",
-	            "color": "#ffffff",
-	            "show": true
-	        },
-	        "Hours": {
-	            "text": "Hrs",
-	            "color": "#ffffff",
-	            "show": true
-	        },
-	        "Minutes": {
-	            "text": "Mins",
-	            "color": "#ffffff",
-	            "show": true
-	        },
-	        "Seconds": {
-	            "text": "Secs",
-	            "color": "#ffffff",
-	            "show": true
-	        }
+	    	if ( $('body').hasClass('offcanvas') ) {
+
+    			$('body').removeClass('offcanvas');
+    			$('.js-fh5co-nav-toggle').removeClass('active');
+	    	}
 	    }
+		});
+
+	};
+
+	var parallax = function() {
+
+		if ( !isiPad() || !isiPhone() ) {
+
+			$(window).stellar({
+				horizontalScrolling: false,
+				hideDistantElements: false, 
+				responsive: true
+			});
+		}	
+	};
+
+
+
+
+
+
+	var contentWayPoint = function() {
+		var i = 0;
+		$('.animate-box').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('animated-fast') ) {
+				
+				i++;
+
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
+
+					$('body .animate-box.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data('animate-effect');
+							if ( effect === 'fadeIn') {
+								el.addClass('fadeIn animated-fast');
+							} else if ( effect === 'fadeInLeft') {
+								el.addClass('fadeInLeft animated-fast');
+							} else if ( effect === 'fadeInRight') {
+								el.addClass('fadeInRight animated-fast');
+							} else {
+								el.addClass('fadeInUp animated-fast');
+							}
+
+							el.removeClass('item-animate');
+						},  k * 200, 'easeInOutExpo' );
+					});
+					
+				}, 100);
+				
+			}
+
+		} , { offset: '85%' } );
+	};
+
+
+	var goToTop = function() {
+
+		$('.js-gotop').on('click', function(event){
+			
+			event.preventDefault();
+
+			$('html, body').animate({
+				scrollTop: $('html').offset().top
+			}, 500, 'easeInOutExpo');
+			
+			return false;
+		});
+
+		$(window).scroll(function(){
+
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$('.js-top').addClass('active');
+			} else {
+				$('.js-top').removeClass('active');
+			}
+
+		});
+	
+	};
+
+
+	// Loading page
+	var loaderPage = function() {
+		$(".fh5co-loader").fadeOut("slow");
+	};
+
+
+	var counterWayPoint = function() {
+		if ($('#fh5co-counter').length > 0 ) {
+			$('#fh5co-counter').waypoint( function( direction ) {
+										
+				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
+					setTimeout( counter , 400);					
+					$(this.element).addClass('animated');
+				}
+			} , { offset: '90%' } );
+		}
+	};
+
+
+	
+	
+	$(function(){
+		contentWayPoint();
+		goToTop();
+		loaderPage();
+		counterWayPoint();
+		parallax();
 	});
 
 
 
-
-
-	
-	//To show loading icon on form submit
-	$('#sub_form').submit(function(){
-			submit_icons('icon', 'loading');
-	})
-
-	if($('#sub_form').length){
-		//Mailchim Subscription form
-		$('#sub_form').ajaxChimp({
-		    callback: bcFunction
-		});
-	}
-	
-
-	//Mail chimp callback function
-	function bcFunction (resp) {
-   		if (resp.result === 'success') {
-			submit_icons('loading', 'icon');
-	        show_tooltip('Thank You For Subscribing To Our Email List');
-	        $('#sub_form #mc-email').val('');
-	    }else{
-			submit_icons('loading', 'icon');
-	        show_tooltip('Please Enter a Correct Email');
-	    }
-	}
-
-	//show and hide loading icon
-	function submit_icons(hide, show){
-			$('#mc_submit i').removeClass(hide);
-			$('#mc_submit i').addClass(show);
-	}
-
-	//Show ToolTip
-    function show_tooltip(msg){
-
-    	if ($(".tooltip").length){
-	    	$(".tooltip").remove(); 
-	    }
-
-        $('.subscription_form').append('<span class="tooltip"></span>');
-        
-        var tooltip = $(".tooltip");
-        tooltip.append(msg);
-         
-        var tipwidth = tooltip.outerWidth();
-        var a_width = $('.subscription_form').width();
-        var a_hegiht = $('.subscription_form').height() + 10;
-
-        var tipwidth = ( a_width- tipwidth)/2;
-        $('.tooltip').css({
-            'left' : tipwidth + 'px',
-            'bottom' : a_hegiht + 'px'
-        }).stop().animate({
-            opacity : 1
-        }, 300);
-
-        setTimeout(function(){
-        	hide_tooltip();
-        }, 2000);
-       
-	}
-
-	//Hide ToolTip
-	function hide_tooltip(){
-
-		var tooltip = $(".tooltip"); 
-		 tooltip.animate({
-            opacity : 0
-        }, 300, function(){
-        	tooltip.remove();
-        });
-
-	}
-
-});
+}());

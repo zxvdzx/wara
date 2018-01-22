@@ -27,6 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'Dashboard',
             'AdminAuth',
             'Permission',
+            'Auth',
         ];
 
         foreach ($models as $model)

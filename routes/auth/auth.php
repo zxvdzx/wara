@@ -9,4 +9,8 @@ Route::group(['namespace' => 'Auth'], function () {
         
         Route::get('/logout', array('as' => 'admin.logout', 'uses' => 'AuthController@getLogout'));
     });
+
+    Route::group(['' => '', '' => ''], function(){
+
+    });
 });

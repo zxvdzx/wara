@@ -41,19 +41,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * {@inheritDoc}
      */
     protected $fillable = [
+        'address',
+        'avatar', 
+        'date_of_birth',
         'email', 
+        'first_name', 
+        'gender',
+        'is_admin', 
+        'last_name', 
         'password', 
         'permissions', 
-        'username', 
-        'first_name', 
-        'last_name', 
-        'avatar', 
-        'is_admin', 
         'phone', 
-        'address',
         'place_of_birth',
-        'date_of_birth',
-        'gender',
+        'username', 
     ];
 
     /**

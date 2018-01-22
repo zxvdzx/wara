@@ -18,7 +18,7 @@
             <div class="header-w3l">
                 <h2>Admission Form</h2>
                 <h4>Enter the Following Details</h4>
-                <form action="#" method="post" class="mod2">
+                {!! Form::open(['route'=>'user.signup', 'files'=>true, 'class' => 'form-horizontal']) !!}
                     <div class="col-md-6 col-xs-6 w3l-left-mk">
                         <ul>
                             <li class="text">First Name :  </li>
@@ -51,7 +51,7 @@
                     <div class="agile-submit">
                         <input type="submit" value="submit">
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
