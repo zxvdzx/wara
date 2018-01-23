@@ -53,6 +53,6 @@ class DashboardRepositoryEloquent extends BaseRepository implements DashboardRep
 
 	public function getIndex()
   	{
-		return view('frontend.dashboard');
+		return view('frontend.under-maintenance.index');
 	}
 }
