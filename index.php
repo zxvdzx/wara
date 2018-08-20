@@ -19,7 +19,7 @@
 |
 */
 
-require __DIR__.'/../public_html/bootstrap/autoload.php';
+require __DIR__.'/../wara/bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ require __DIR__.'/../public_html/bootstrap/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../public_html/bootstrap/app.php';
+$app = require_once __DIR__.'/../wara/bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
