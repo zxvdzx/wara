@@ -38,6 +38,7 @@ class DashboardController extends Controller
         }
         catch (\Exception $e) 
         {
+            errorLog($e);
             throw new \Exception($e->getMessage());
         }
         

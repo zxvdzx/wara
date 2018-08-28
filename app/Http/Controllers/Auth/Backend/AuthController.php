@@ -56,6 +56,7 @@ class AuthController extends Controller
         }
         catch (\Exception $e) 
         {
+            errorLog($e);
             throw new \Exception($e->getMessage());
         }
 
@@ -65,7 +66,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $param = $request->all();
-
+        
         $rules = [
               'email' => 'required|email',
               'password' => 'required|min:8',
@@ -88,6 +89,7 @@ class AuthController extends Controller
             }
             catch (\Exception $e) 
             {
+                errorLog($e);
                 throw new \Exception($e->getMessage());
             }
         }
@@ -101,6 +103,7 @@ class AuthController extends Controller
         }
         catch (\Exception $e) 
         {
+            errorLog($e);
             throw new \Exception($e->getMessage());
         }
         

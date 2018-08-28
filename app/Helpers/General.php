@@ -240,6 +240,19 @@ if (! function_exists('datatables')) {
     }
 }
 
+if (! function_exists('errorLog')) {
+    /**
+     * Shortcut for errorLog.
+     *
+     * @param  mixed $builder
+     * @return mixed
+     */
+    function errorLog($e)
+    {
+        return \Log::error('file:'.$e->getFile().' | '.'line:'.$e->getLine().' | '.'message:'.$e->getMessage());
+    }
+}
+
 if (! function_exists('eform_datetime')) {
     /**
      * Generate new datetime from configured format datetime.
