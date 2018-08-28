@@ -24,8 +24,6 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
         return Permission::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -41,7 +39,15 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function listPermissions()
     {
-        return $this->model->listPermissions();
+        try
+        {   
+            return $this->model->listPermissions();
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 
     /**
@@ -52,7 +58,15 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function formatLabelToPermission($permissionLabel)
     {
-        return $this->model->formatLabelToPermission($permissionLabel);
+        try
+        {   
+            return $this->model->formatLabelToPermission($permissionLabel);
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 
     /**
@@ -63,7 +77,15 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function listPermissionsFromLabels($labelList)
     {
-        return $this->model->listPermissionsFromLabels($labelList);
+        try
+        {   
+            return $this->model->listPermissionsFromLabels($labelList);
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 
     /**
@@ -74,7 +96,15 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function validateLabels($labelList)
     {
-        return $this->model->validateLabels($labelList);
+        try
+        {   
+            return $this->model->validateLabels($labelList);
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 
     /**
@@ -84,7 +114,15 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function listPermissionsLabels()
     {
-        return $this->model->listPermissionsLabels();
+        try
+        {   
+            return $this->model->listPermissionsLabels();
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 
     /**
@@ -95,6 +133,14 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function getPermissionListFromConfig($roleSlug)
     {
-        return $this->model->getPermissionListFromConfig($roleSlug);
+        try
+        {   
+            return $this->model->getPermissionListFromConfig($roleSlug);
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
     }
 }

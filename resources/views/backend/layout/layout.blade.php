@@ -1,311 +1,472 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        {!! Html::meta(null, null, ['charset' => 'UTF-8']) !!}
-        {!! Html::meta('robots', 'noindex, nofollow') !!}
-        {!! Html::meta('Admin Web', env('APP_WEB_ADMIN_NAME', 'Web Admin')) !!}
-        {!! Html::meta('description', env('APP_WEB_ADMIN_NAME', 'Web Admin')) !!}
-        {!! Html::meta('author', ' ') !!}
-        {!! Html::meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') !!}
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="description" content="Waratime Admin Template v.1">
+	<meta name="author" content="Isna Nur Azis">
+	<meta name="keyword" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Waratime</title>
+ 
+	<!-- start: Css -->
+	{!! Html::style( $pathp.'assets/backend/css/bootstrap.min.css') !!}
 
-        <title>{{ env('APP_WEB_ADMIN_NAME', 'Web Admin') }} - @yield('title')</title>
+	<!-- plugins -->
+	{!! Html::style( $pathp.'assets/backend/css/plugins/font-awesome.min.css') !!}
+	{!! Html::style( $pathp.'assets/backend/css/plugins/simple-line-icons.css') !!}
+	{!! Html::style( $pathp.'assets/backend/css/plugins/animate.min.css') !!}
+	{!! Html::style( $pathp.'assets/backend/css/plugins/fullcalendar.min.css') !!}
+    {!! Html::style( $pathp.'assets/backend/css/style.css') !!}
+    {!! Html::style( $pathp.'assets/backend/pnotify/pnotify.custom.css') !!}
+	<!-- end: Css -->
+    {!! Html::style($pathp.'assets/backend/datatables/dataTables.bootstrap.css') !!}
 
-        <!-- Web Fonts  -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="{{ asset($pathp.'assets/backend/img/logomi.png')}}">
+  </head>
 
-        {!! Html::style( $pathp.'assets/backend/css/bootstrap.min.css') !!}
-        {!! Html::style( $pathp.'assets/backend/font-awesome/4.5.0/css/font-awesome.min.css') !!}
-        {!! Html::style( $pathp.'assets/backend/css/fonts.googleapis.com.css') !!}
-        {!! Html::style( $pathp.'assets/backend/css/ace.min.css') !!}
-        {!! Html::style( $pathp.'assets/backend/css/ace-skins.min.css') !!}
-        {!! Html::style( $pathp.'assets/backend/css/ace-rtl.min.css') !!}
+ <body id="mimin" class="dashboard">
+      <!-- start: Header -->
+        @include('backend.layout.partials.navbar')
+      <!-- end: Header -->
 
-        {!! Html::script( $pathp.'assets/backend/js/ace-extra.min.js') !!}
-
-        @yield('css')
-    </head>
-
-    <body class="no-skin">
-        <div id="navbar" class="navbar navbar-default ace-save-state">
-            @include('backend.layout.partials.navbar')
-        </div>
-
-        <div class="main-container ace-save-state" id="main-container">
-            <script type="text/javascript">
-                try{ace.settings.loadState('main-container')}catch(e){}
-            </script>
-
+      <div class="container-fluid mimin-wrapper">
+  
+          <!-- start:Left Menu -->
             @include('backend.layout.partials.sidemenu')
+          <!-- end: Left Menu -->
 
-            <div class="main-content">
-                <div class="main-content-inner">
-                    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                        
-                        @yield('breadcrumb')
+  		
+          <!-- start: content -->
+            <div id="content">
+                @yield('content')
+			</div>
+          <!-- end: content -->
 
-                        <div class="nav-search" id="nav-search">
-                            <form class="form-search">
-                                <span class="input-icon">
-                                    <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-                                    <i class="ace-icon fa fa-search nav-search-icon"></i>
-                                </span>
-                            </form>
-                        </div><!-- /.nav-search -->
-                    </div>
+    
+          <!-- start: right menu -->
+            @include('backend.layout.partials.rightmenu')
+          <!-- end: right menu -->
+          
+      </div>
 
-                    <div class="page-content">
-                        
-                        @include('backend.layout.partials.setting')
+      <!-- start: Mobile -->
+      <div id="mimin-mobile" class="reverse">
+        <div class="mimin-mobile-menu-list">
+            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+                <ul class="nav nav-list">
+                    <li class="active ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-home fa"></span>Dashboard 
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
+                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-diamond fa"></span>Layout
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="topnav.html">Top Navigation</a></li>
+                        <li><a href="boxed.html">Boxed</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa-area-chart fa"></span>Charts
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="chartjs.html">ChartJs</a></li>
+                        <li><a href="morris.html">Morris</a></li>
+                        <li><a href="flot.html">Flot</a></li>
+                        <li><a href="sparkline.html">SparkLine</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-pencil-square"></span>Ui Elements
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="color.html">Color</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="typography.html">Typography</a></li>
+                        <li><a href="icons.html">Icons</a></li>
+                        <li><a href="buttons.html">Buttons</a></li>
+                        <li><a href="media.html">Media</a></li>
+                        <li><a href="panels.html">Panels & Tabs</a></li>
+                        <li><a href="notifications.html">Notifications & Tooltip</a></li>
+                        <li><a href="badges.html">Badges & Label</a></li>
+                        <li><a href="progress.html">Progress</a></li>
+                        <li><a href="sliders.html">Sliders</a></li>
+                        <li><a href="timeline.html">Timeline</a></li>
+                        <li><a href="modal.html">Modals</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                       <span class="fa fa-check-square-o"></span>Forms
+                       <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="formelement.html">Form Element</a></li>
+                        <li><a href="#">Wizard</a></li>
+                        <li><a href="#">File Upload</a></li>
+                        <li><a href="#">Text Editor</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-table"></span>Tables
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="datatables.html">Data Tables</a></li>
+                        <li><a href="handsontable.html">handsontable</a></li>
+                        <li><a href="tablestatic.html">Static</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a href="calendar.html">
+                         <span class="fa fa-calendar-o"></span>Calendar
+                      </a>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-envelope-o"></span>Mail
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="mail-box.html">Inbox</a></li>
+                        <li><a href="compose-mail.html">Compose Mail</a></li>
+                        <li><a href="view-mail.html">View Mail</a></li>
+                      </ul>
+                    </li>
+                    <li class="ripple">
+                      <a class="tree-toggle nav-header">
+                        <span class="fa fa-file-code-o"></span>Pages
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                      </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="forgotpass.html">Forgot Password</a></li>
+                        <li><a href="login.html">SignIn</a></li>
+                        <li><a href="reg.html">SignUp</a></li>
+                        <li><a href="article-v1.html">Article v1</a></li>
+                        <li><a href="search-v1.html">Search Result v1</a></li>
+                        <li><a href="productgrid.html">Product Grid</a></li>
+                        <li><a href="profile-v1.html">Profile v1</a></li>
+                        <li><a href="invoice-v1.html">Invoice v1</a></li>
+                      </ul>
+                    </li>
+                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa "></span> MultiLevel  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                      <ul class="nav nav-list tree">
+                        <li><a href="view-mail.html">Level 1</a></li>
+                        <li><a href="view-mail.html">Level 1</a></li>
+                        <li class="ripple">
+                          <a class="sub-tree-toggle nav-header">
+                            <span class="fa fa-envelope-o"></span> Level 1
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                          </a>
+                          <ul class="nav nav-list sub-tree">
+                            <li><a href="mail-box.html">Level 2</a></li>
+                            <li><a href="compose-mail.html">Level 2</a></li>
+                            <li><a href="view-mail.html">Level 2</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a href="credits.html">Credits</a></li>
+                  </ul>
+            </div>
+        </div>       
+      </div>
+      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+        <span class="fa fa-bars"></span>
+      </button>
+       <!-- end: Mobile -->
 
-                        @yield('header')
+	<!-- start: Javascript -->
+	{!! Html::script( $pathp.'assets/backend/js/jquery.min.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/jquery.ui.min.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/bootstrap.min.js') !!}
+    
+    <!-- plugins -->
+	{!! Html::script( $pathp.'assets/backend/js/plugins/moment.min.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/plugins/fullcalendar.min.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/plugins/jquery.nicescroll.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/plugins/chart.min.js') !!}
+	
+    {!! Html::script($pathp.'assets/backend/datatables/jquery.dataTables.min.js') !!}
+    {!! Html::script($pathp.'assets/backend/datatables/dataTables.bootstrap.min.js') !!}
+    
+    <!-- custom -->
+    {!! Html::script( $pathp.'assets/backend/pnotify/pnotify.custom.js') !!}
+    {!! Html::script( $pathp.'assets/backend/js/jquery.form/jquery.form.js') !!}
+	{!! Html::script( $pathp.'assets/backend/js/main.js') !!}
+     <script type="text/javascript">
+      (function(jQuery){
 
-                        @yield('content')
-                        
-                    </div><!-- /.page-content -->
-                </div>
-            </div><!-- /.main-content -->
+        // start: Chart =============
 
-            @include('backend.layout.partials.footer')
+        Chart.defaults.global.pointHitDetectionRadius = 1;
+        Chart.defaults.global.customTooltips = function(tooltip) {
 
-            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-            </a>
-        </div><!-- /.main-container -->
-        <!-- Vendor -->
-        {!! Html::script( $pathp.'assets/backend/js/jquery-2.1.4.min.js') !!}
+            var tooltipEl = $('#chartjs-tooltip');
 
-        <script type="text/javascript">
-            if('ontouchstart' in document.documentElement) document.write('<script src="{{ asset($pathp.'assets/js/jquery.mobile.custom.min.js') }}">'+'<'+'/script>');
-        </script>
+            if (!tooltip) {
+                tooltipEl.css({
+                    opacity: 0
+                });
+                return;
+            }
+
+            tooltipEl.removeClass('above below');
+            tooltipEl.addClass(tooltip.yAlign);
+
+            var innerHtml = '';
+            if (undefined !== tooltip.labels && tooltip.labels.length) {
+                for (var i = tooltip.labels.length - 1; i >= 0; i--) {
+                    innerHtml += [
+                        '<div class="chartjs-tooltip-section">',
+                        '   <span class="chartjs-tooltip-key" style="background-color:' + tooltip.legendColors[i].fill + '"></span>',
+                        '   <span class="chartjs-tooltip-value">' + tooltip.labels[i] + '</span>',
+                        '</div>'
+                    ].join('');
+                }
+                tooltipEl.html(innerHtml);
+            }
+
+            tooltipEl.css({
+                opacity: 1,
+                left: tooltip.chart.canvas.offsetLeft + tooltip.x + 'px',
+                top: tooltip.chart.canvas.offsetTop + tooltip.y + 'px',
+                fontFamily: tooltip.fontFamily,
+                fontSize: tooltip.fontSize,
+                fontStyle: tooltip.fontStyle
+            });
+        };
+        var randomScalingFactor = function() {
+            return Math.round(Math.random() * 100);
+        };
+        var lineChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: "My First dataset",
+                fillColor: "rgba(21,186,103,0.4)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(66,69,67,0.3)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                 data: [18,9,5,7,4.5,4,5,4.5,6,5.6,7.5]
+            }, {
+                label: "My Second dataset",
+                fillColor: "rgba(21,113,186,0.5)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [4,7,5,7,4.5,4,5,4.5,6,5.6,7.5]
+            }]
+        };
+
+        var doughnutData = [
+                {
+                    value: 300,
+                    color:"#129352",
+                    highlight: "#15BA67",
+                    label: "Alfa"
+                },
+                {
+                    value: 50,
+                    color: "#1AD576",
+                    highlight: "#15BA67",
+                    label: "Beta"
+                },
+                {
+                    value: 100,
+                    color: "#FDB45C",
+                    highlight: "#15BA67",
+                    label: "Gamma"
+                },
+                {
+                    value: 40,
+                    color: "#0F5E36",
+                    highlight: "#15BA67",
+                    label: "Peta"
+                },
+                {
+                    value: 120,
+                    color: "#15A65D",
+                    highlight: "#15BA67",
+                    label: "X"
+                }
+
+            ];
+
+
+        var doughnutData2 = [
+                {
+                    value: 100,
+                    color:"#129352",
+                    highlight: "#15BA67",
+                    label: "Alfa"
+                },
+                {
+                    value: 250,
+                    color: "#FF6656",
+                    highlight: "#FF6656",
+                    label: "Beta"
+                },
+                {
+                    value: 100,
+                    color: "#FDB45C",
+                    highlight: "#15BA67",
+                    label: "Gamma"
+                },
+                {
+                    value: 40,
+                    color: "#FD786A",
+                    highlight: "#15BA67",
+                    label: "Peta"
+                },
+                {
+                    value: 120,
+                    color: "#15A65D",
+                    highlight: "#15BA67",
+                    label: "X"
+                }
+
+            ];
+
+        var barChartData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        fillColor: "rgba(21,186,103,0.4)",
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(21,186,103,0.2)",
+                        highlightStroke: "rgba(21,186,103,0.2)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "My Second dataset",
+                        fillColor: "rgba(21,113,186,0.5)",
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(21,113,186,0.2)",
+                        highlightStroke: "rgba(21,113,186,0.2)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            };
+
+         window.onload = function(){
+                var ctx = $(".doughnut-chart")[0].getContext("2d");
+                window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {
+                    responsive : true,
+                    showTooltips: true
+                });
+
+                var ctx2 = $(".line-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx2).Line(lineChartData, {
+                     responsive: true,
+                        showTooltips: true,
+                        multiTooltipTemplate: "<%= value %>",
+                     maintainAspectRatio: false
+                });
+
+                var ctx3 = $(".bar-chart")[0].getContext("2d");
+                window.myLine = new Chart(ctx3).Bar(barChartData, {
+                     responsive: true,
+                        showTooltips: true
+                });
+
+                var ctx4 = $(".doughnut-chart2")[0].getContext("2d");
+                window.myDoughnut2 = new Chart(ctx4).Doughnut(doughnutData2, {
+                    responsive : true,
+                    showTooltips: true
+                });
+
+            };
         
-        {!! Html::script( $pathp.'assets/backend/js/bootstrap.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery-ui.custom.min.js') !!}
-        {!! Html::style( $pathp.'assets/backend/js/jquery.ui.touch-punch.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery.easypiechart.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery.sparkline.index.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery.flot.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery.flot.pie.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/jquery.flot.resize.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/ace-elements.min.js') !!}
-        {!! Html::script( $pathp.'assets/backend/js/ace.min.js') !!}
+        //  end:  Chart =============
 
-        <!-- inline scripts related to this page -->
-        <script type="text/javascript">
-            jQuery(function($) {
-                $('.easy-pie-chart.percentage').each(function(){
-                    var $box = $(this).closest('.infobox');
-                    var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
-                    var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-                    var size = parseInt($(this).data('size')) || 50;
-                    $(this).easyPieChart({
-                        barColor: barColor,
-                        trackColor: trackColor,
-                        scaleColor: false,
-                        lineCap: 'butt',
-                        lineWidth: parseInt(size/10),
-                        animate: ace.vars['old_ie'] ? false : 1000,
-                        size: size
-                    });
-                })
-            
-                $('.sparkline').each(function(){
-                    var $box = $(this).closest('.infobox');
-                    var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
-                    $(this).sparkline('html',
-                                     {
-                                        tagValuesAttribute:'data-values',
-                                        type: 'bar',
-                                        barColor: barColor ,
-                                        chartRangeMin:$(this).data('min') || 0
-                                     });
-                });
-            
-            
-              //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
-              //but sometimes it brings up errors with normal resize event handlers
-              $.resize.throttleWindow = false;
-            
-              var placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'150px'});
-              var data = [
-                { label: "social networks",  data: 38.7, color: "#68BC31"},
-                { label: "search engines",  data: 24.5, color: "#2091CF"},
-                { label: "ad campaigns",  data: 8.2, color: "#AF4E96"},
-                { label: "direct traffic",  data: 18.6, color: "#DA5430"},
-                { label: "other",  data: 10, color: "#FEE074"}
-              ]
-              function drawPieChart(placeholder, data, position) {
-                  $.plot(placeholder, data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            tilt:0.8,
-                            highlight: {
-                                opacity: 0.25
-                            },
-                            stroke: {
-                                color: '#fff',
-                                width: 2
-                            },
-                            startAngle: 2
-                        }
-                    },
-                    legend: {
-                        show: true,
-                        position: position || "ne", 
-                        labelBoxBorderColor: null,
-                        margin:[-30,15]
-                    }
-                    ,
-                    grid: {
-                        hoverable: true,
-                        clickable: true
-                    }
-                 })
-             }
-             drawPieChart(placeholder, data);
-            
-             /**
-             we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
-             so that's not needed actually.
-             */
-             placeholder.data('chart', data);
-             placeholder.data('draw', drawPieChart);
-            
-            
-              //pie chart tooltip example
-              var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
-              var previousPoint = null;
-            
-              placeholder.on('plothover', function (event, pos, item) {
-                if(item) {
-                    if (previousPoint != item.seriesIndex) {
-                        previousPoint = item.seriesIndex;
-                        var tip = item.series['label'] + " : " + item.series['percent']+'%';
-                        $tooltip.show().children(0).text(tip);
-                    }
-                    $tooltip.css({top:pos.pageY + 10, left:pos.pageX + 10});
-                } else {
-                    $tooltip.hide();
-                    previousPoint = null;
-                }
-                
-             });
+        // start: Calendar =========
+         $('.dashboard .calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '2015-02-12',
+            businessHours: true, // display business hours
+            editable: true,
+            events: [
+                {
+                    title: 'Business Lunch',
+                    start: '2015-02-03T13:00:00',
+                    constraint: 'businessHours'
+                },
+                {
+                    title: 'Meeting',
+                    start: '2015-02-13T11:00:00',
+                    constraint: 'availableForMeeting', // defined below
+                    color: '#20C572'
+                },
+                {
+                    title: 'Conference',
+                    start: '2015-02-18',
+                    end: '2015-02-20'
+                },
+                {
+                    title: 'Party',
+                    start: '2015-02-29T20:00:00'
+                },
 
-                $(document).one('ajaxloadstart.page', function(e) {
-                    $tooltip.remove();
-                });
+                // areas where "Meeting" must be dropped
+                {
+                    id: 'availableForMeeting',
+                    start: '2015-02-11T10:00:00',
+                    end: '2015-02-11T16:00:00',
+                    rendering: 'background'
+                },
+                {
+                    id: 'availableForMeeting',
+                    start: '2015-02-13T10:00:00',
+                    end: '2015-02-13T16:00:00',
+                    rendering: 'background'
+                },
 
-                var d1 = [];
-                for (var i = 0; i < Math.PI * 2; i += 0.5) {
-                    d1.push([i, Math.sin(i)]);
+                // red areas where no events can be dropped
+                {
+                    start: '2015-02-24',
+                    end: '2015-02-28',
+                    overlap: false,
+                    rendering: 'background',
+                    color: '#FF6656'
+                },
+                {
+                    start: '2015-02-06',
+                    end: '2015-02-08',
+                    overlap: true,
+                    rendering: 'background',
+                    color: '#FF6656'
                 }
-            
-                var d2 = [];
-                for (var i = 0; i < Math.PI * 2; i += 0.5) {
-                    d2.push([i, Math.cos(i)]);
-                }
-            
-                var d3 = [];
-                for (var i = 0; i < Math.PI * 2; i += 0.2) {
-                    d3.push([i, Math.tan(i)]);
-                }
-                
-            
-                var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
-                $.plot("#sales-charts", [
-                    { label: "Domains", data: d1 },
-                    { label: "Hosting", data: d2 },
-                    { label: "Services", data: d3 }
-                ], {
-                    hoverable: true,
-                    shadowSize: 0,
-                    series: {
-                        lines: { show: true },
-                        points: { show: true }
-                    },
-                    xaxis: {
-                        tickLength: 0
-                    },
-                    yaxis: {
-                        ticks: 10,
-                        min: -2,
-                        max: 2,
-                        tickDecimals: 3
-                    },
-                    grid: {
-                        backgroundColor: { colors: [ "#fff", "#fff" ] },
-                        borderWidth: 1,
-                        borderColor:'#555'
-                    }
-                });
-            
-            
-                $('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-                function tooltip_placement(context, source) {
-                    var $source = $(source);
-                    var $parent = $source.closest('.tab-content')
-                    var off1 = $parent.offset();
-                    var w1 = $parent.width();
-            
-                    var off2 = $source.offset();
-                    //var w2 = $source.width();
-            
-                    if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-                    return 'left';
-                }
-            
-            
-                $('.dialogs,.comments').ace_scroll({
-                    size: 300
-                });
-                
-                
-                //Android's default browser somehow is confused when tapping on label which will lead to dragging the task
-                //so disable dragging when clicking on label
-                var agent = navigator.userAgent.toLowerCase();
-                if(ace.vars['touch'] && ace.vars['android']) {
-                  $('#tasks').on('touchstart', function(e){
-                    var li = $(e.target).closest('#tasks li');
-                    if(li.length == 0)return;
-                    var label = li.find('label.inline').get(0);
-                    if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
-                  });
-                }
-            
-                $('#tasks').sortable({
-                    opacity:0.8,
-                    revert:true,
-                    forceHelperSize:true,
-                    placeholder: 'draggable-placeholder',
-                    forcePlaceholderSize:true,
-                    tolerance:'pointer',
-                    stop: function( event, ui ) {
-                        //just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
-                        $(ui.item).css('z-index', 'auto');
-                    }
-                    }
-                );
-                $('#tasks').disableSelection();
-                $('#tasks input:checkbox').removeAttr('checked').on('click', function(){
-                    if(this.checked) $(this).closest('li').addClass('selected');
-                    else $(this).closest('li').removeClass('selected');
-                });
-            
-            
-                //show the dropdowns on top or bottom depending on window height and menu position
-                $('#task-tab .dropdown-hover').on('mouseenter', function(e) {
-                    var offset = $(this).offset();
-            
-                    var $w = $(window)
-                    if (offset.top > $w.scrollTop() + $w.innerHeight() - 100) 
-                        $(this).addClass('dropup');
-                    else $(this).removeClass('dropup');
-                });
-            
-            })
-        </script>
+            ]
+        });
+        // end : Calendar==========
 
-        @yield('scripts')
-    </body>
+      })(jQuery);
+     </script>
+  <!-- end: Javascript -->
+        @yield('script')
+  </body>
 </html>

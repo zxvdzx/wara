@@ -80,7 +80,6 @@ class AuthRepositorySentinel implements AuthRepository
     public function getRoles()
     {
         $user = $this->user();
-
         if ($user)
         {
             $userRoles = $user->roles;

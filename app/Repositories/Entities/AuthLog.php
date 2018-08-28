@@ -16,6 +16,9 @@ class AuthLog extends Model
         'user_id',
         'ip_address', 
         'login', 
+        'platform_name', 
+        'browser_name', 
+        'device_family', 
         'logout',
     ];
 

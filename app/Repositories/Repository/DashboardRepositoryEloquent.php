@@ -4,42 +4,35 @@ namespace App\Repositories\Repository;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-
 use App\Repositories\Contracts\DashboardRepository;
-// use App\Repositories\Entities\User; 
-
-// use DB;
-// use Hash;
-// use Input;
-// use Sentinel;
 
 class DashboardRepositoryEloquent extends BaseRepository implements DashboardRepository
 {
-  /**
-   * Specify Model class name
-   *
-   * @return string
-   */
-  public function model()
-  {
-      // return Portofolio::class;
-  }
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        //
+    }
 
-  /**
-   * Boot up the repository, pushing criteria
-   */
-  public function boot()
-  {
-      $this->pushCriteria(app(RequestCriteria::class));
-  }
+    /**
+     * Boot up the repository, pushing criteria
+     */
+    public function boot()
+    {
+        $this->pushCriteria(app(RequestCriteria::class));
+    }
 
-  // /**
-  //  * Repository presenter
-  //  */
-  // public function presenter()
-  // {
-  //     return 'App\\Repositories\\Presenters\\PortfolioPresenter';
-  // }
+    // /**
+    //  * Repository presenter
+    //  */
+    // public function presenter()
+    // {
+    //     return 'App\\Repositories\\Presenters\\PortfolioPresenter';
+    // }
 
 	/**
 	* @var $model
@@ -53,6 +46,14 @@ class DashboardRepositoryEloquent extends BaseRepository implements DashboardRep
 
 	public function getIndex()
   	{
-		return view('frontend.dashboard');
+        try
+        {   
+            return view('backend.dashboard');
+        }
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
 	}
 }
