@@ -5,9 +5,9 @@
 <div class="panel box-shadow-none content-header">
     <div class="panel-body">
         <div class="col-md-12">
-            <h3 class="animated fadeInLeft">Category</h3>
+            <h3 class="animated fadeInLeft">{{ trans('general.header.category') }}</h3>
             <p class="animated fadeInDown">
-                Exercise <span class="fa-angle-right fa"></span> Category
+                {{ trans('general.header.exercise') }} <span class="fa-angle-right fa"></span> {{ trans('general.header.category') }}
             </p>
         </div>
     </div>
@@ -16,17 +16,17 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
-            <a class="btn btn-gradient btn-primary"onclick="javascript:show_form_create()" title="Create">Create</a>
+            <a class="btn btn-gradient btn-primary"onclick="javascript:show_form_create()" title="{{ trans('general.button.create') }}">{{ trans('general.button.create') }}</a>
             </div>
             <div class="panel-body">
                 <div class="responsive-table">
                     <table id="data-tables" class="table table-striped table-bordered table-condensed table-responsive" data-tables="true">
                         <thead>
                             <tr>
-                                <th class="center-align">ID</th>
-                                <th class="center-align">Updated At</th>
-                                <th class="center-align">Category</th>
-                                <th class="center-align" width="15%">Action</th>
+                                <th class="center-align">{{ trans('general.table.id') }}</th>
+                                <th class="center-align">{{ trans('general.table.update_at') }}</th>
+                                <th class="center-align">{{ trans('general.table.category') }}</th>
+                                <th class="center-align" width="15%">{{ trans('general.table.action') }}</th>
                             </tr>
                         </thead>
                     </table>
@@ -41,14 +41,14 @@
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title FormData-title" id="myModalLabel">Create</h4>
+                <h4 class="modal-title FormData-title" id="myModalLabel">{{ trans('general.button.create') }}</h4>
             </div>
             <div class="modal-body">
                 {!! Form::open(['route'=>'admin.category.post', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
                     <input type="hidden" name="action" id="action" value="">
                     <input type="hidden" name="id" value="">
                     <div class="form-group area-insert-update">
-                        <label class="col-md-3 control-label">Category</label>
+                        <label class="col-md-3 control-label">{{ trans('general.form.category') }}</label>
                         <div class="col-lg-9">
                             {!! Form::text('category', null, array('class' => 'form-control col-lg-8', 'autofocus' => 'true')) !!}
                             <p class="has-error text-danger error-name"></p>
@@ -60,20 +60,20 @@
                     </div>
                     <div class="form-group area-delete">
                         <div class="col-md-12">
-                            <center>Are You Sure for Delete This Data ?</center>
+                            <center>{{ trans('general.messages.delete_confirm') }}</center>
                         </div>
                     </div>
                     <div class="form-group area-insert-update">
                         <center>
-                            {!! Form::submit('Save', ['class' => 'btn btn-primary btn-gradient btn-submit', 'title' => 'Save']) !!}&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-gradient btn-warning btn-reset" type="reset">Reset</button>&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            {!! Form::submit(trans('general.button.save'), ['class' => 'btn btn-primary btn-gradient btn-submit', 'title' => trans('general.button.save')]) !!}&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-gradient btn-warning btn-reset" type="reset">{{ trans('general.button.reset') }}</button>&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">{{ trans('general.button.cancel') }}</button>
                         </center>
                     </div>
                     <div class="form-group area-delete">
                         <center>
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-submit', 'title' => 'Delete']) !!}
-                            <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            {!! Form::submit(trans('general.button.delete'), ['class' => 'btn btn-danger btn-submit', 'title' => trans('general.button.delete')]) !!}
+                            <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">{{ trans('general.button.cancel') }}</button>
                         </center>
                     </div>
                 </form>
@@ -99,7 +99,7 @@
     });
 
     function show_form_create(){
-        $('.FormData-title').html('Create Category');
+        $('.FormData-title').html("{{ trans('general.modal.create_category') }}");
         $("[name='action']").val('create');
         $("[name='category']").val('');
         $('.area-insert-update').show();
@@ -132,7 +132,7 @@
         $("[name='id']").val(id);
         $('.area-insert-update').show();
         $('.area-delete').hide();
-        $('.FormData-title').html('Update Category');
+        $('.FormData-title').html("{{ trans('general.modal.update_category') }}");
         $("[name='action']").val('update');
         $('#modalFormData').modal({backdrop: 'static', keyboard: false});
         $('#modalFormData').modal('show');
@@ -142,7 +142,7 @@
         $("[name='id']").val(id);
         $('.area-insert-update').hide();
         $('.area-delete').show();
-        $('.FormData-title').html('Delete Category');
+        $('.FormData-title').html("{{ trans('general.modal.delete_category') }}");
         $("[name='action']").val('delete');
         $('#modalFormData').modal({backdrop: 'static', keyboard: false});
         $('#modalFormData').modal('show');

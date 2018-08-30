@@ -12,4 +12,14 @@ class Answer extends Model
         'question_id',
         'mc_id',
     ];
+
+    public function setAttributesFromJson($attributes)
+    {
+        if(isset($attributes['question_id'])){
+            $this->question_id = $attributes['question_id'];
+        }
+        if(isset($attributes['mc_id'])){
+            $this->mc_id = $attributes['mc_id'];
+        }
+    }
 }

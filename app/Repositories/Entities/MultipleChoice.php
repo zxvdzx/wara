@@ -12,4 +12,14 @@ class MultipleChoice extends Model
         'question_id',
         'choice',
     ];
+
+    public function setAttributesFromJson($attributes)
+    {
+        if(isset($attributes['question_id'])){
+            $this->question_id = $attributes['question_id'];
+        }
+        if(isset($attributes['choice'])){
+            $this->choice = $attributes['choice'];
+        }
+    }
 }

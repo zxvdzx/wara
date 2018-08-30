@@ -13,4 +13,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Backend', 'middleware' => 'Ad
         Route::post('/', array('as' => 'admin.category.post', 'uses' => 'QuestionCategoryController@postData'));
         Route::get('/category-datatables', array('as' => 'admin.category.datatable', 'uses' => 'QuestionCategoryController@datatables'));
     });
+
+    #-- Question
+    Route::group(['prefix' => 'question', 'namespace' => 'Question'], function () {
+        Route::get('/', array('as' => 'admin.question', 'uses' => 'QuestionController@index'));
+        Route::post('/', array('as' => 'admin.question.post', 'uses' => 'QuestionController@postData'));
+        Route::get('/category-datatables', array('as' => 'admin.question.datatable', 'uses' => 'QuestionController@datatables'));
+    });
 });

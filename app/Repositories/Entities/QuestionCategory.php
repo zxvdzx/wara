@@ -18,4 +18,9 @@ class QuestionCategory extends Model
             $this->category = $attributes['category'];
         }
     }
+    
+    public static function getCategoryList()
+    {
+        return QuestionCategory::pluck('category','id')->all();
+    }
 }

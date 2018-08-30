@@ -1,6 +1,19 @@
 <?php
 use Carbon\Carbon;
 
+if (! function_exists('base_url')) {
+    /**
+     * Get the path to the storage folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function base_url($path = '')
+    {
+        return env('APP_URL').$path;
+    }
+}
+
 if (! function_exists('user_info')) {
     /**
      * Get logged user info.

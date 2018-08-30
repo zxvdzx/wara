@@ -11,7 +11,7 @@
                 <a class="tree-toggle nav-header"><span class="fa fa-envelope-o"></span> Exercise <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                 <ul class="nav nav-list tree">
                     <li><a href="{{ route('admin.category') }}">Category</a></li>
-                    <li><a href="">Question</a></li>
+                    <li><a href="{{ route('admin.question') }}">Question</a></li>
                 </ul>
             </li>
         </ul>

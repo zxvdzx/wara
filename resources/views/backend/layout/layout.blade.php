@@ -18,11 +18,13 @@
 	{!! Html::style( $pathp.'assets/backend/css/plugins/simple-line-icons.css') !!}
 	{!! Html::style( $pathp.'assets/backend/css/plugins/animate.min.css') !!}
 	{!! Html::style( $pathp.'assets/backend/css/plugins/fullcalendar.min.css') !!}
-    {!! Html::style( $pathp.'assets/backend/css/style.css') !!}
+	{!! Html::style( $pathp.'assets/backend/css/plugins/mediaelementplayer.css') !!}
     {!! Html::style( $pathp.'assets/backend/pnotify/pnotify.custom.css') !!}
 	<!-- end: Css -->
     {!! Html::style($pathp.'assets/backend/datatables/dataTables.bootstrap.css') !!}
+    {!! Html::style( $pathp.'assets/backend/css/style.css') !!}
 
+    @yield('style')
 	<link rel="shortcut icon" href="{{ asset($pathp.'assets/backend/img/logomi.png')}}">
   </head>
 
@@ -198,6 +200,7 @@
     
     <!-- plugins -->
 	{!! Html::script( $pathp.'assets/backend/js/plugins/moment.min.js') !!}
+    {!! Html::script($pathp.'assets/backend/js/plugins/mediaelement-and-player.min.js') !!}
 	{!! Html::script( $pathp.'assets/backend/js/plugins/fullcalendar.min.js') !!}
 	{!! Html::script( $pathp.'assets/backend/js/plugins/jquery.nicescroll.js') !!}
 	{!! Html::script( $pathp.'assets/backend/js/plugins/chart.min.js') !!}
