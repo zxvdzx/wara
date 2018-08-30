@@ -12,7 +12,7 @@
                             <input type="email" name="email" placeholder="E-mail" required="">
                             <input type="password" name="password" placeholder="Password" required="">
                             <div class="tp">
-                                <input type="submit" value="Sign In">
+                                <input type="submit" value="Sign In" disabled>
                             </div>
                         </form>
                     </div>
@@ -23,7 +23,7 @@
                             <li><a href="#"><i class="fa fa-rss"></i></a></li>
                         </ul>
                     </div> -->
-                    <p><a href="#" data-toggle="modal" data-target="#myModal3" > Don't have an account?</a></p>
+                    <!-- <p><a href="#" data-toggle="modal" data-target="#myModal3" > Don't have an account?</a></p> -->
                 </div>
             </div>
         </div>

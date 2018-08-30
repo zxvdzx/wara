@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Backend\BaseController as Controller;
-use App\Repositories\Contracts\DashboardRepository;
+use App\Repositories\Contracts\FeDashboardRepository;
 
 use Input;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ class DashboardController extends Controller
     
     private $dashboard_repository;
 
-    public function __construct(DashboardRepository $dashboard_repository)
+    public function __construct(FeDashboardRepository $dashboard_repository)
     {
         // $this->middleware('sentinel_access:dashboard');
         $this->dashboard_repository = $dashboard_repository;

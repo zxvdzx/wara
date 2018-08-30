@@ -29,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'Permission',
             'AdminQuestionCategory',
             'AdminQuestion',
+            'FeDashboard',
         ];
 
         foreach ($models as $model)

@@ -51,7 +51,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			</div> -->
 			<ul class="agile_forms">
 				<li><a class="active" href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> </li>
-				<li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up</a> </li>
+				<!-- <li><a href="#" data-toggle="modal" data-target="#myModal3"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up</a> </li> -->
 			</ul>
 			
 			<!-- Collect the nav links, forms, and other content for toggling -->

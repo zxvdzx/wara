@@ -49,7 +49,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="agile-submit">
-                        <input type="submit" value="submit">
+                        <input type="submit" value="submit" disabled>
                     </div>
                 </form>
             </div>

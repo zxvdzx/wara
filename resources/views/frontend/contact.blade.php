@@ -59,7 +59,7 @@
                             <label>Message*</label>
                             <textarea placeholder name="Message" required=""></textarea>
                         </div>
-                            <input type="submit" value="Send">
+                            <input type="submit" value="Send" disabled="disabled">
                     </form>
                 </div>
             </div>
