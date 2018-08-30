@@ -62,7 +62,7 @@
                 {!! Form::open(['route'=>'admin.question.post', 'files'=>true, 'class' => 'form-horizontal jquery-form-data']) !!}
                     <input type="hidden" name="action" id="action" value="">
                     <input type="hidden" name="id" value="">
-                    <div class="col-md-12 panel" style="padding:50px;">
+                    <div class="col-md-12 panel area-insert-update" style="padding:50px;">
                         <div class="form-group area-insert-update">
                             <label><span style="font-size:18px">{{ trans('general.form.category') }}<span></label>
                             <select class="form-control" name="category_name">
@@ -93,7 +93,7 @@
                         <div class="form-group{{ Form::hasError('point') }} has-feedback">
                             {!! Form::errorMsg('point') !!}
                         </div>
-                        <div class="form-group form-animate-checkbox">
+                        <div class="form-group area-insert-update form-animate-checkbox">
                           <input type="checkbox" class="checkbox" onclick="enableFileInput(this.id)" id="is_file" name="is_file">
                           <label>{{ trans('general.form.upload') }}</label>
                         </div>
@@ -430,6 +430,12 @@
     }
 
     function show_form_delete(id){
+        $("[name='question']").removeAttr('required');
+        $("[name='point']").removeAttr('required');
+        $("[name='mc[0]']").removeAttr('required');
+        $("[name='mc[1]']").removeAttr('required');
+        $("[name='mc[2]']").removeAttr('required');
+        $("[name='mc[3]']").removeAttr('required');
         $("[name='id']").val(id);
         $('.area-insert-update').hide();
         $('.area-delete').show();

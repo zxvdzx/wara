@@ -136,7 +136,7 @@ class AdminQuestionRepositoryEloquent extends BaseRepository implements AdminQue
                         $answer->save();
                         AuditrailLog::saveData(user_info('email'),'create','questions | multiple choices | answers',[],$attributes);
                         
-                        $response['notification'] = 'Success Create Data';
+                        $response['notification'] = 'Create Data Successfully';
                         $response['status'] = 'success';
                     }else if($attributes['action'] == 'update'){
                         $data   = Question::find($attributes['id']);
@@ -198,7 +198,7 @@ class AdminQuestionRepositoryEloquent extends BaseRepository implements AdminQue
 
                         AuditrailLog::saveData(user_info('email'),'update','questions | multiple choices | answers',$old_data,$attributes);
 
-                        $response['notification'] = 'Success Update Data';
+                        $response['notification'] = 'Update Data Successfully';
                         $response['status'] = 'success';
                     }
                     DB::commit();
@@ -211,8 +211,8 @@ class AdminQuestionRepositoryEloquent extends BaseRepository implements AdminQue
                 }
             }else{
                 $data   = Question::find($attributes['id']);
-                $mc     = MultipleChoice::where('question_id',$data->id)->first();
-                $answer = Answer::where('mc_id',$mc->id)->first();
+                $mc     = MultipleChoice::where('question_id',$data->id)->delete();
+                $answer = Answer::where('question_id',$data->id)->first();
                 
                 $temp_data = [
                     'question_id' => $data->id, 
@@ -221,10 +221,17 @@ class AdminQuestionRepositoryEloquent extends BaseRepository implements AdminQue
                     'answer_id'   => $answer->id, 
                 ];
 
+                if($data->file_path <> ""){
+                    $file_path = base_path($data->file_path);
+                    if(file_exists($file_path))
+                        unlink($file_path);
+                }
+                
                 $old_data = json_encode($temp_data);
                 AuditrailLog::saveData(user_info('email'),'delete','questions | multiple choices | answers',$old_data,[]);
                 if( $data->delete() ){
-                    $response['notification'] = 'Delete Data Success';
+                    $answer->delete();
+                    $response['notification'] = 'Delete Data Successfully';
                     $response['status'] = 'success';
                 }else{
                     $response['notification'] = 'Delete Data Failed';
