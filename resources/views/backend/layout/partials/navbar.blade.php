@@ -33,9 +33,9 @@
                     <li role="separator" class="divider"></li>
                     <li class="more">
                     <ul>
-                    <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                    <li><a href=""><span class="fa fa-lock"></span></a></li>
-                    <li><a href=""><span class="fa fa-power-off "></span></a></li>
+                    <li><a href="#0"><span class="fa fa-cogs"></span></a></li>
+                    <li><a href="#0"><span class="fa fa-lock"></span></a></li>
+                    <li><a href="{{ route('admin.logout')}}"><span class="fa fa-power-off "></span></a></li>
                     </ul>
                 </li>
                 </ul>
