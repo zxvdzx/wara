@@ -18,6 +18,7 @@ use Sentinel;
 use Session;
 use Validator;
 use Request;
+use Browser;
 
 class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRepository
 {
@@ -130,6 +131,9 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
                 'user_id' => $userId,
                 'ip_address' => $ipAddress,
                 'login' => date('Y-m-d H:i:s'),
+                'platform_name' => Browser::platformName(),
+                'device_family' => Browser::deviceFamily(),
+                'browser_name' => Browser::browserName(),
             ]);
 
             flash()->success('Login success!');

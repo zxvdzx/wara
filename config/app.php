@@ -189,6 +189,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        \hisorange\BrowserDetect\ServiceProvider::class,
     ],
 
     /*
@@ -252,6 +253,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
+        'Browser' => \hisorange\BrowserDetect\Facade::class,
     ],
 
 ];
