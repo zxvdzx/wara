@@ -12,7 +12,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--// Meta tag Keywords -->
 <!-- css files -->
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/bootstrap.css') !!}"> <!-- Bootstrap-Core-CSS -->
-<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/style.css') !!}" type="text/css" media="all" /> <!-- Style-CSS --> 
+<link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/style.css') !!}" type="text/css" media="all" />
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/font-awesome.css') !!}"> <!-- Font-Awesome-Icons-CSS -->
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/swipebox.css') !!}">
 <link rel="stylesheet" href="{!! asset($pathp.'assets/frontend/css/jquery-ui.css') !!}" />
@@ -21,6 +21,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 <!-- //online-fonts -->
+<style>
+	.error{
+		color:red;
+	}
+</style>
 @yield('css')
 </head>
 <body>
@@ -169,6 +174,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	});
 </script>
 	<script type="text/javascript">
+		// setTimeout(function(){ $('.alert-info').hide(); }, 10000);
 		$(document).ready(function() {
 		/*
 			var defaults = {

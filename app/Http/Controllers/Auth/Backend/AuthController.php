@@ -89,11 +89,73 @@ class AuthController extends Controller
             }
             catch (\Exception $e) 
             {
+                if($e->getMessage() == "Your account has not been activated yet."){
+                    flash()->error($e->getMessage().' Please activate your account before trying to log in.');
+                    return redirect()->route('admin.login');
+                }
                 errorLog($e);
                 throw new \Exception($e->getMessage());
             }
         }
         return $postLogin;
+    }
+    
+    public function postLoginMember(Request $request)
+    {
+        $param = $request->all();
+        
+        $rules = [
+              'email' => 'required|email',
+              'password' => 'required|min:8',
+            ];
+
+        $messages = [
+                    'email.required'        => 'Email is required',
+                    'email.email'           => 'Email is invalid',
+                    'password.required'     => 'Password is required',
+                    'password.min'          => 'Password needs to have at least 8 characters',
+                ];
+
+        $validate = Validator::make($param, $rules, $messages);
+        
+        if($validate->fails()) {
+            $this->validate($request, $rules, $messages);
+        } else {
+            try{
+                $postLogin = $this->admin_auth_repository->postLogin($param);
+            }
+            catch (\Exception $e) 
+            {
+                if($e->getMessage() == "Your account has not been activated yet."){
+                    flash()->error($e->getMessage().' Please activate your account before trying to log in.');
+                    return redirect()->route('admin.login');
+                }
+                errorLog($e);
+                throw new \Exception($e->getMessage());
+            }
+        }
+        return $postLogin;
+    }
+
+    /**
+    * Activation Account User.
+    * paths url    : activation-user/{code}
+    * methode      : POST
+    * @param  string   $code Code Activation user
+    * @return Response
+    */
+    public function activationUser($id, $code)
+    {
+        try{
+            $activate = $this->admin_auth_repository->activationUser($id, $code);
+        }
+        catch (\Exception $e) 
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage());
+        }
+        
+        return $activate;
     }
 
     public function getLogout()

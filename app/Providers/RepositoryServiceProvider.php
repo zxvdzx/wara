@@ -30,6 +30,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'AdminQuestionCategory',
             'AdminQuestion',
             'FeDashboard',
+            'Form',
         ];
 
         foreach ($models as $model)

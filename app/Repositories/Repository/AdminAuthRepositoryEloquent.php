@@ -145,6 +145,7 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
         } catch (NotActivatedException $e) {
             errorLog($e);
             flash()->error('Please activate your account before trying to log in.');
+            return redirect()->route('admin.login');
         }
 
         return $backToLogin;
@@ -168,5 +169,28 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
         Sentinel::logout();
         
         return redirect()->route($route);
+    }
+    
+    public function activationUser($id, $code)
+    {
+        $user = Sentinel::findById($id);
+        
+        if ($user) {
+            $activation = \Activation::exists($user);
+            
+            if($activation) {
+                if (\Activation::complete($user, $code)){
+                    flash()->success('Your account has been activated successfully. You can now login');
+                    return redirect('/');
+                } else {
+                    return redirect('/');
+                }
+            } else {
+                flash()->warning('Your account has been activated');
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
     }
 }

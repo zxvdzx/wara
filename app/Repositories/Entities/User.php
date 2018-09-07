@@ -69,45 +69,61 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function createNewUser($data,$type = null,$role = null)
     {
-        DB::beginTransaction();//begin transaction
         try{
+            DB::beginTransaction();//begin transaction
 
+            if($data['gender']=='Man'){
+                $data['gender']=='L';
+            }
+            if($data['gender']=='Woman'){
+                $data['gender']=='P';
+            }
+            
+            $bdtmp = explode('/',$data['birthdate']);
+            $data['birthdate'] = $bdtmp[2].'-'.$bdtmp[1].'-'.$bdtmp[0];
+            
             $credentials = [
-                'email'    => $data['email'],
-                'password' => $data['password'],
+                'email'             => $data['email'],
+                'password'          => $data['password'],
+                'first_name'        => $data['firstName'],
             ];
 
             $user = Sentinel::register($credentials);
 
+            $updUser = [
+                'place_of_birth'    => $data['birthplace'],
+                'date_of_birth'     => $data['birthdate'],
+                'phone'             => $data['phone'],
+                'address'           => $data['address'],
+                'gender'            => $data['gender'],
+                'last_name'         => $data['lastName'],
+            ];
+            $user->update($updUser);
             if(empty($role)) {
                 $role = 'user';
             }
-
+            
             Sentinel::findRoleBySlug($role)->users()->attach(Sentinel::findById($user->id));
-
             $activation = \Activation::create($user);
-
-            $updateUser = $this->find($user->id);
-            $updateUser->username = $data['username'];
-
+            
             if($type == 'from_admin') {
-                \Activation::complete($user, $activation->code);
-                $data_email = array('id'=>$updateUser->id,
-                                    'email'=>$updateUser->email,
-                                    'username'=>$updateUser->username,
-                                    'password'=>$data['password'],
-                                    'subject_email'=>trans('general.subject_verification_email'),
-                                    'activation_code'=>'');
-
-
+                // \Activation::complete($user, $activation->code);
+                // $data_email = array('id'=>$updateUser->id,
+                //                     'email'=>$updateUser->email,
+                //                     'username'=>$updateUser->username,
+                //                     'password'=>$data['password'],
+                //                     'subject_email'=>trans('general.subject_verification_email'),
+                //                     'activation_code'=>'');
+                
+                
             } else {
-                //send email verification
-                $data_email = array('id'=>$updateUser->id,
-                                    'email'=>$updateUser->email,
-                                    'username'=>$updateUser->username,
-                                    'password'=>$data['password'],
-                                    'subject_email'=>trans('general.subject_verification_email'),
-                                    'activation_code'=>$activation->code);
+                // send email verification
+                $data_email = array('id'=>$user->id,
+                'email'=>$user->email,
+                'username'=>$user->first_name,
+                'password'=>$data['password'],
+                'subject_email'=>trans('general.messages.subject_verification_email'),
+                'activation_code'=>$activation->code);
             }
 
             $this->sendEmailVerifcation($data_email);
@@ -122,17 +138,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
         DB::commit();//commit transactions
         \Log::info('model insert user');
-        $status = array('code' => '200','status' => 'success','data'=>$updateUser);
-        return $status;
+        
+        return true;
     }
 
     public function sendEmailVerifcation($data)
     {
-        $mail = Mail::queue('email.verification', $data,
-            function($message) use($data) {
-                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_ADDRESS'));
-                $message->to($data['email'], $data['email'])->subject($data['subject_email']);
-            });
+        try{
+            $mail = Mail::send('email.verification', $data,
+                        function($message) use($data) {
+                            $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_ADDRESS'));
+                            $message->to($data['email'], $data['email'])->subject($data['subject_email']);
+                        });
+        } 
+        catch (\Exception $e)
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage(), null, $e);
+        }
 
     }
 

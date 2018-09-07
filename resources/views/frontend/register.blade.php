@@ -45,7 +45,7 @@
                             <input name="lastName" type="text" required="" placeholder="Last Name">
                             <input name="email" type="email" required="" placeholder="Email">
                             <input name="placeOfBirth" type="text" required="" placeholder="Place Of Birth">
-                            <input class="date" id="datepicker" name="dateOfBirth" type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required=""  placeholder="Date Of Birth">
+                            <input class="date" id="datepicker" name="birthdate" type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required=""  placeholder="Date Of Birth">
                             <input name="password" type="text" required="" placeholder="password">
                             <input name="passwordConfirm" type="text" required="" placeholder="Confirm Password">
                             <input name="phone" type="text" required="" placeholder="Phone">

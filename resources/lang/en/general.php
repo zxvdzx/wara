@@ -41,6 +41,7 @@ return [
     ],
     'messages' => [
         'delete_confirm' => 'Are You Sure for Delete This Data ?',
+        'subject_verification_email' => 'Verifcation Email Account',
     ],
     'modal' => [
         'create_category' => 'Create Category',

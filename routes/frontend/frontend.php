@@ -13,4 +13,6 @@
 
 Route::group(['namespace' => 'Frontend'], function () { 
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
+    Route::post('/contact-us', array('as' => 'contact.us', 'uses' => 'FormController@contactUs'));
+    Route::post('/user-register', array('as' => 'user.register', 'uses' => 'FormController@userRegister'));
 });

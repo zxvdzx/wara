@@ -13,6 +13,7 @@ interface AdminAuthRepository extends RepositoryInterface
 	function getLogin();
 	
 	function postLogin($attributes);
+	function activationUser($id, $code);
 
 	function getLogout();
 }
