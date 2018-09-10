@@ -13,6 +13,7 @@ use App\Repositories\Entities\MultipleChoice;
 use App\Repositories\Entities\Answer;
 use App\Repositories\Entities\UserAnswer;
 use App\Repositories\Entities\UserPoint;
+use App\Repositories\Entities\UserQuestion;
 
 class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepository
 {
@@ -87,7 +88,13 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
     {
         try {
             $userId = $this->auth_repository->getUserInfo('id');
+            $userQuestion = UserQuestion::where('user_id', $userId)->where('question_id', $this->categoryId)->first();
+
+            if($userQuestion){
+                flash()->warning('Access Denied !!!');
             
+                return back();
+            }
             $questionIdList = [];
             $point = 0;
             foreach($attributes as $k => $val){
@@ -105,6 +112,12 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
                     }
                 }
             }
+
+            $userQuestion = new UserQuestion();
+            $userQuestion->user_id     = $userId;
+            $userQuestion->question_id = $this->categoryId;
+            $userQuestion->save();
+            
             $userPoint = new UserPoint();
             $userPoint->user_id     = $userId;
             $userPoint->category_id = $this->categoryId;
