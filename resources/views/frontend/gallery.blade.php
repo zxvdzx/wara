@@ -100,30 +100,6 @@
                         </div>
                 </a>
                 </div>
-                <div class="col-md-3 col-xs-3 gallery-grid gallery1">
-                    <a href="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="swipebox"><img src="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="img-responsive" alt="/">
-                        <div class="textbox">
-                        <h4>scholarly</h4>
-                            <p><i class="fa fa-picture-o" aria-hidden="true"></i></p>
-                        </div>
-                </a>
-                </div>
-                <div class="col-md-3 col-xs-3 gallery-grid gallery1">
-                    <a href="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="swipebox"><img src="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="img-responsive" alt="/">
-                        <div class="textbox">
-                        <h4>scholarly</h4>
-                            <p><i class="fa fa-picture-o" aria-hidden="true"></i></p>
-                        </div>
-                </a>
-                </div>
-                <div class="col-md-3 col-xs-3 gallery-grid gallery1">
-                    <a href="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="swipebox"><img src="{{ asset($pathp.'assets/frontend/images/g12.jpg') }}" class="img-responsive" alt="/">
-                        <div class="textbox">
-                        <h4>scholarly</h4>
-                            <p><i class="fa fa-picture-o" aria-hidden="true"></i></p>
-                        </div>
-                </a>
-                </div>
                 <div class="clearfix"> </div>
 </section>
 <!-- //gallery -->

@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         'AdminAccess' => \App\Http\Middleware\AdminAccess::class,
+        'MemberAccess' => \App\Http\Middleware\MemberAccess::class,
         'SentinelHasAccess' => \App\Http\Middleware\SentinelHasAccess::class,
     ];
 }

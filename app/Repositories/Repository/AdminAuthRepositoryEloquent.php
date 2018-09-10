@@ -67,12 +67,23 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
 
         return view('auth.backend.login', compact('form'))->with('type','admin');
 	}
+    
+    public function getLoginMember()
+    {
+        $form = [
+            'class' => 'form-signin',
+            'url' => route('admin.login'),
+            'autocomplete' => 'off',
+        ];
+
+        return view('auth.backend.login', compact('form'))->with('type','member');
+	}
 
     public function postLogin($attributes)
     {
         if($attributes['type'] == "member"){
             $route_login_type = "member.login";
-            $route_dashboard_type = "member.dashboard";
+            $route_dashboard_type = "exercise";
         }else{
             $route_login_type = "admin.login";
             $route_dashboard_type = "admin.dashboard";
@@ -154,6 +165,26 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
     public function getLogout()
     {
         $route = 'admin.login';      
+        $userId = $this->auth_repository->getUserInfo('id');
+
+        $idLog = AuthLog::getLastIdByCurrentUser($userId);
+
+        $logs = AuthLog::find($idLog);
+        if($logs){
+            $logs->logout = date('Y-m-d H:i:s');
+            $logs->save();
+        }
+
+        setcookie("isAuthorized");
+
+        Sentinel::logout();
+        
+        return redirect()->route($route);
+    }
+    
+    public function getLogoutMember()
+    {
+        $route = 'dashboard';      
         $userId = $this->auth_repository->getUserInfo('id');
 
         $idLog = AuthLog::getLastIdByCurrentUser($userId);

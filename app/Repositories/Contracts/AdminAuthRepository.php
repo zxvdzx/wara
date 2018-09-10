@@ -11,9 +11,11 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface AdminAuthRepository extends RepositoryInterface
 {
 	function getLogin();
+	function getLoginMember();
 	
 	function postLogin($attributes);
 	function activationUser($id, $code);
 
 	function getLogout();
+	function getLogoutMember();
 }

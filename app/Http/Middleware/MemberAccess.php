@@ -13,7 +13,7 @@ use Session;
 
 use Illuminate\Support\Facades\Auth;
 
-class AdminAccess
+class MemberAccess
 {
     /**
      * Handle an incoming request.
@@ -27,7 +27,7 @@ class AdminAccess
     public function handle($request, Closure $next, $permission='')
     {
         if(!Sentinel::check()){
-            return Redirect::route('admin.login');
+            return Redirect::route('member.login');
         }
 
         return $next($request);

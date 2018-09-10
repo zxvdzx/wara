@@ -55,24 +55,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</form>
 			</div> -->
 			<ul class="agile_forms">
-				@if(Sentinel::check())
+                @if(Sentinel::check())
 				    <li><a class="active" href="{{ route('member.logout') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign Out</a> </li>
 				@else
                     <li><a class="active" href="{{ route('member.login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> </li>
                 @endif
-			</ul>
+            </ul>
 			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 				<nav class="link-effect-2" id="link-effect-2">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{ url('/') }}" class="effect-3">Home</a></li>
-						<li><a href="#about" class="effect-3 scroll">About Us</a></li>
-						<li><a href="#services" class="effect-3 scroll">Services</a></li>
-						<li><a href="#team" class="effect-3 scroll">Team</a></li>
-						<li><a href="#gallery" class="effect-3 scroll">Gallery</a></li>
-						<li><a href="#mail" class="effect-3 scroll">Mail Us</a></li>
-						<li><a href="{{ route('exercise') }}" class="effect-3">Exercise</a></li>
+						<li><a href="{{ url('/') }}" class="effect-3">Home</a></li>
+						<li class="active"><a href="{{ route('exercise') }}" class="effect-3">Exercise</a></li>
 					</ul>
 				</nav>
 
@@ -82,7 +77,41 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	</div>
 </div>
 
-@yield('content')
+<div id="mail" class="contact">
+    <div class="container">
+        <h3 class="w3l-title">{{ $categoryName }}</h3>
+        <br>
+        <div class="alert-info">
+            @include('flash::message')
+        </div>
+        <div class="contact-grid1">
+            <div class="contact-top1">
+                {!! Form::open(['route'=>'post.exercise', 'files'=>true]) !!}
+                    <ol start="1" type="1">
+                        @foreach($questions as $key => $value)
+                        <li>{{$value['question']}}</li>
+                        @if($value['file_path']!=null)
+                            <audio name="audio_name" src="{{ url($value['file_path']) }}" type="audio/mp3" controls="controls"></audio>
+                        @endif
+                        <br>
+                        <ol start="1" type="a">
+                            <i>
+                                @foreach($choices as $k => $val)
+                                    @if($val['question_id']==$value['id'])
+                                        <li><input type="radio" name="ans.{{$value['id']}}" value="{{$val['id']}}"> {{ $val['choice'] }}</li>
+                                    @endif
+                                @endforeach
+                            </i>  
+                        </ol>
+                        <br>
+                        @endforeach
+                    </ol>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- footer -->
 <div class="footer">

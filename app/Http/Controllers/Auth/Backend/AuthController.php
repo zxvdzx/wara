@@ -62,6 +62,21 @@ class AuthController extends Controller
 
         return $loginPage;
     }
+    
+    public function getLoginMember()
+    {
+
+        try{
+            $loginPage = $this->admin_auth_repository->getLoginMember();
+        }
+        catch (\Exception $e) 
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage());
+        }
+
+        return $loginPage;
+    }
 
     public function postLogin(Request $request)
     {
@@ -91,44 +106,11 @@ class AuthController extends Controller
             {
                 if($e->getMessage() == "Your account has not been activated yet."){
                     flash()->error($e->getMessage().' Please activate your account before trying to log in.');
-                    return redirect()->route('admin.login');
-                }
-                errorLog($e);
-                throw new \Exception($e->getMessage());
-            }
-        }
-        return $postLogin;
-    }
-    
-    public function postLoginMember(Request $request)
-    {
-        $param = $request->all();
-        
-        $rules = [
-              'email' => 'required|email',
-              'password' => 'required|min:8',
-            ];
-
-        $messages = [
-                    'email.required'        => 'Email is required',
-                    'email.email'           => 'Email is invalid',
-                    'password.required'     => 'Password is required',
-                    'password.min'          => 'Password needs to have at least 8 characters',
-                ];
-
-        $validate = Validator::make($param, $rules, $messages);
-        
-        if($validate->fails()) {
-            $this->validate($request, $rules, $messages);
-        } else {
-            try{
-                $postLogin = $this->admin_auth_repository->postLogin($param);
-            }
-            catch (\Exception $e) 
-            {
-                if($e->getMessage() == "Your account has not been activated yet."){
-                    flash()->error($e->getMessage().' Please activate your account before trying to log in.');
-                    return redirect()->route('admin.login');
+                    if($param['type'] == "member"){
+                        return redirect()->route('member.login');
+                    }else{
+                        return redirect()->route('admin.login');
+                    }
                 }
                 errorLog($e);
                 throw new \Exception($e->getMessage());
@@ -162,6 +144,20 @@ class AuthController extends Controller
     {
         try{
             $getLogout = $this->admin_auth_repository->getLogout();
+        }
+        catch (\Exception $e) 
+        {
+            errorLog($e);
+            throw new \Exception($e->getMessage());
+        }
+        
+        return $getLogout;
+    }
+    
+    public function getLogoutMember()
+    {
+        try{
+            $getLogout = $this->admin_auth_repository->getLogoutMember();
         }
         catch (\Exception $e) 
         {

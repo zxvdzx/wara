@@ -7,14 +7,20 @@
         </div>
         <div class="agile_banner_bottom_grids">
             <div class="col-md-4 col-xs-4 w3_agile_contact_grid">
-                <div class="agile_contact_grid_left">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <div class="agile_contact_grid_left agileits_w3layouts_left1">
+                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </div>
-                <div class="agile_contact_grid_right agilew3_contact">
-                    <h4>Address</h4>
-                    <p>435 City hall,</p>
-                    <p>NewYork City SD092.</p>
+                <div class="agile_contact_grid_right agileits_w3layouts_right1">
+                    <h4>Subscribe</h4>
+                    <input class"email-sub" style="width: 80%;
+		padding: 4px 1px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;" placeholder="Please input your email" name="mailsub" type="email" >
                 </div>
+                <div class="clearfix"> </div>
             </div>
             <div class="col-md-4 col-xs-4 w3_agile_contact_grid">
                 <div class="agile_contact_grid_left agileits_w3layouts_left">
@@ -22,7 +28,7 @@
                 </div>
                 <div class="agile_contact_grid_right agileits_w3layouts_right">
                     <h4>Phone</h4>
-                    <p>+(1234) 2332 232 <span>+(1236) 2334 232</span></p>
+                    <p>+(1236) 2334 232</p><br>
                 </div>
             </div>
             <div class="col-md-4 col-xs-4 w3_agile_contact_grid">
@@ -31,8 +37,7 @@
                 </div>
                 <div class="agile_contact_grid_right agileits_w3layouts_right1">
                     <h4>Email</h4>
-                    <p><a href="mailto:info@example.com">info@example1.com</a>
-                        <span><a href="mailto:info@example.com">info@example2.com</a></span></p>
+                    <p>info@example2.com</p><br>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -66,3 +71,4 @@
         </div>
     </div>
 </div>
+<!-- <div id="map"></div> -->

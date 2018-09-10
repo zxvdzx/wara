@@ -31,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'AdminQuestion',
             'FeDashboard',
             'Form',
+            'Exercise',
         ];
 
         foreach ($models as $model)
