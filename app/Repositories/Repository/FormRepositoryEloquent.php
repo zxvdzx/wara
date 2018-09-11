@@ -47,13 +47,18 @@ class FormRepositoryEloquent extends BaseRepository implements FormRepository
     {
         
         try {
+            DB::beginTransaction();
+
             $this->user->createNewUser($attributes);
+            DB::commit();
             
             flash()->success('Register successfully!, please check your email to activate your account.');
             return back();
         } 
         catch (\Exception $e)
         {
+            DB::rollBack();
+
             errorLog($e);
             throw new \Exception($e->getMessage(), null, $e);
         }

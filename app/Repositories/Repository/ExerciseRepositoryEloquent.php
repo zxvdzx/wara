@@ -15,6 +15,8 @@ use App\Repositories\Entities\UserAnswer;
 use App\Repositories\Entities\UserPoint;
 use App\Repositories\Entities\UserQuestion;
 
+use DB;
+
 class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepository
 {
     /**
@@ -87,6 +89,14 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
     public function post($attributes)
     {
         try {
+            DB::beginTransaction();
+
+            if($this->questions->count()!=(count($attributes)-2)){
+                flash()->warning('Please answer all question !');
+
+                return back();
+            }
+            
             $userId = $this->auth_repository->getUserInfo('id');
             $userQuestion = UserQuestion::where('user_id', $userId)->where('question_id', $this->categoryId)->first();
 
@@ -124,12 +134,16 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
             $userPoint->point       = $point;
             $userPoint->save();
 
+            DB::commit();
+
             flash()->success('Congratulations !!!');
             
             return back();
         } 
         catch (\Exception $e)
         {
+            DB::rollBack();
+
             errorLog($e);
             throw new \Exception($e->getMessage(), null, $e);
         }
