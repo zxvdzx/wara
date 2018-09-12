@@ -16,6 +16,7 @@ use App\Repositories\Entities\UserPoint;
 use App\Repositories\Entities\UserQuestion;
 
 use DB;
+use Input;
 
 class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepository
 {
@@ -92,21 +93,20 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
             DB::beginTransaction();
 
             if($this->questions->count()!=(count($attributes)-2)){
-                flash()->warning('Please answer all question !');
-
-                return back();
+                $alert = ['ALERT','Please answer all question !','Warning !'];
+                return redirect()->back()->withErrors($alert);
             }
             
             $userId = $this->auth_repository->getUserInfo('id');
             $userQuestion = UserQuestion::where('user_id', $userId)->where('question_id', $this->categoryId)->first();
 
             if($userQuestion){
-                flash()->warning('Access Denied !!!');
-            
-                return back();
+                $alert = ['ALERT','Access Denied !','Warning !'];
+                return redirect()->back()->withErrors($alert);
             }
-            $questionIdList = [];
+            $questionIdList = $result = [];
             $point = 0;
+            $counter = 1;
             foreach($attributes as $k => $val){
                 $ans = explode('_',$k);
                 if($ans[0]=='ans'){
@@ -117,12 +117,21 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
                     $userAnswer->save();
                     $pointPatern = Question::where('id', $ans[1])->first()->point;
                     $answerPatern = Answer::where('question_id', $ans[1])->first()->mc_id;
+                    
                     if($answerPatern==$val){
                         $point+=$pointPatern;
                     }
+                    $namePatern = MultipleChoice::find($answerPatern)->choice;
+                    $nameAns    = MultipleChoice::find($val)->choice;
+                    array_push($result, [
+                        'no' => $counter.'.',
+                        'answer' => $nameAns, 
+                        'key' => $namePatern
+                        ]);
+                    $counter++;
                 }
             }
-
+            
             $userQuestion = new UserQuestion();
             $userQuestion->user_id     = $userId;
             $userQuestion->question_id = $this->categoryId;
@@ -136,9 +145,13 @@ class ExerciseRepositoryEloquent extends BaseRepository implements ExerciseRepos
 
             DB::commit();
 
-            flash()->success('Congratulations !!!');
+            $alert = ['RESULT',$userPoint->point,$result];
+
+            $categoryName = $this->categoryName;
+            $questions    = $this->questions;
+            $choices      = $this->choices;
             
-            return back();
+            return view('frontend.exercise', compact('categoryName','questions','choices','alert'));
         } 
         catch (\Exception $e)
         {

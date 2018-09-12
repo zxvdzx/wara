@@ -25,6 +25,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	.error{
 		color:red;
 	}
+	.center-align{
+		text-align:center;
+	}
 </style>
 @yield('css')
 </head>
@@ -76,14 +79,56 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<div class="clearfix"> </div> 
 	</div>
 </div>
-
+@if($errors->any())
+	<input type="hidden" name="code" id="code" value="{{ $errors->all()[0] }}">
+	<input type="hidden" name="messages" id="messages" value="{{ $errors->all()[1] }}">
+	<input type="hidden" name="headerm" id="headerm" value="{{ $errors->all()[2] }}">
+@endif
+@if(isset($alert))
+		<input type="hidden" name="code" id="code" value="{{ $alert[0] }}">
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 style="text-align:center; font-size:25px" id="headerModal">Conratulations !</h4>
+					</div>
+					<div class="modal-body" id="getContentModal">
+						<label>Your Point : {{$alert[1]}}</label><br>
+						<label>Your Answer :</label>
+						<table id="data-tables" class="table table-hover table-bordered table-condensed table-responsive" data-tables="true">
+							<thead>
+								<tr>
+									<th class="center-align" width="5%">No.</th>
+									<th class="center-align">Answer</th>
+									<th class="center-align">Key</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($alert[2] as $value)
+									<tr>
+										<td class="center-align">{{ $value['no'] }}</td>
+										@if($value['answer']==$value['key'])
+											<td class="center-align"><span style="color:green">{{ $value['answer'] }}</span></td>
+											<td class="center-align"><span style="color:green">{{ $value['key'] }}</span></td>
+										@else
+											<td class="center-align"><span style="color:red">{{ $value['answer'] }}</span></td>
+											<td class="center-align"><span style="color:green">{{ $value['key'] }}</span></td>
+										@endif
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+@endif()
 <div id="mail" class="contact">
     <div class="container">
         <h3 class="w3l-title">{{ $categoryName }}</h3>
         <br>
-        <div class="alert-info">
-            @include('flash::message')
-        </div>
         <div class="contact-grid1">
             <div class="contact-top1">
                 {!! Form::open(['route'=>'post.exercise', 'files'=>true]) !!}
@@ -113,6 +158,20 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
     </div>
 </div>
 
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+   	 	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 style="text-align:center; font-size:25px" id="headerModal"></h4>
+			</div>
+			<div class="modal-body" id="getContentModal">
+				<p id="message" style="color:red; text-align:center; font-size:20px"></p>
+			</div>
+		</div>
+    </div>
+</div>
 <!-- footer -->
 <div class="footer">
 	<div class="container">
@@ -178,6 +237,17 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="{{ asset($pathp.'assets/frontend/js/move-top.js') }}"></script>
 <script type="text/javascript" src="{{ asset($pathp.'assets/frontend/js/easing.js') }}"></script>
 <script type="text/javascript">
+	var code 	 	= $("[name='code']").val();
+	var messages 	= $("[name='messages']").val();
+	var headeModal 	= $("[name='headerm']").val();
+	
+	if(code=="ALERT"){
+		$("#myModal2").modal("show");
+		$("#message").html(messages);
+		$("#headerModal").html(headeModal);
+	}else if(code=="RESULT"){
+		$("#myModal3").modal("show");
+	}
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
