@@ -114,7 +114,7 @@ class AdminAuthRepositoryEloquent extends BaseRepository implements AdminAuthRep
             }
             $role_slug = $this->auth_repository->getUserInfo('role');
             
-            if (strtolower($role_slug) != 'member' and $attributes['type'] == "member" or strtolower($role_slug) == 'member' and $attributes['type'] == "admin") {
+            if (strtolower($role_slug) != 'user' and $attributes['type'] == "user" or strtolower($role_slug) == 'user' and $attributes['type'] == "admin") {
                 flash()->error('You Have No Access!');
                 Sentinel::logout();
 
