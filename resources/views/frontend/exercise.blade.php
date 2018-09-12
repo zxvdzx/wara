@@ -124,7 +124,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</div>
 			</div>
 		</div>
-@endif()
+@endif
+@if(count($questions)>0)
 <div id="mail" class="contact">
     <div class="container">
         <h3 class="w3l-title">{{ $categoryName }}</h3>
@@ -151,12 +152,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
                         <br>
                         @endforeach
                     </ol>
+					
                     <input type="submit" value="Submit">
                 </form>
             </div>
         </div>
     </div>
 </div>
+@endif
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -172,6 +175,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		</div>
     </div>
 </div>
+@if(count($questions)>0)
 <!-- footer -->
 <div class="footer">
 	<div class="container">
@@ -218,6 +222,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<p>© {{ date('Y') }} {{ config('app.name')}}. All rights reserved</p>
 	</div>
 </div>
+@endif
 <!-- //footer -->
 
 <!-- js-scripts -->			
