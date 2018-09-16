@@ -66,17 +66,19 @@ class QuestionCategoryController extends Controller
             $attributes = $request->all();
             if($attributes['action'] == 'get-data'){
                 $data = $this->question_category_repository->processData('get-data',$attributes);
+            }else if($attributes['action'] == 'active' || $attributes['action'] == 'inactive'){
+                $data = $this->question_category_repository->processData('active',$attributes);
             }else if($attributes['action'] == 'delete'){
                 $data = $this->question_category_repository->processData('delete',$attributes);
             }else{
-                $rules = ['category' => 'required'];
+                // $rules = ['category' => 'required'];
 
-                $validate = Validator::make($attributes,$rules);
-                if($validate->fails()) {
-                    $this->validate($request,$rules);
-                }else{
+                // $validate = Validator::make($attributes,$rules);
+                // if($validate->fails()) {
+                //     $this->validate($request,$rules);
+                // }else{
                     $data = $this->question_category_repository->processData('post',$attributes);
-                }
+                // }
             }
         }
         catch (\Exception $e) 

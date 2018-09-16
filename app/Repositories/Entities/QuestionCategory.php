@@ -23,4 +23,10 @@ class QuestionCategory extends Model
     {
         return QuestionCategory::pluck('category','id')->all();
     }
+
+    public static function changeIsActive($id)
+    {
+        QuestionCategory::where('id',$id)->update(['is_active' => true]);
+        QuestionCategory::where('id','<>',$id)->update(['is_active' => false]);
+    }
 }

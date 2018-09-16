@@ -23,7 +23,8 @@ return [
         'close'         => 'Close',
         'cancel'        => 'Cancel',
         'cancel_option' => 'Cancel Option',
-        'update'        => 'Update'
+        'update'        => 'Update',
+        'submit'        => 'Submit'
     ],
     'table' => [
         'id'        => 'ID',
@@ -41,6 +42,7 @@ return [
     ],
     'messages' => [
         'delete_confirm' => 'Are You Sure for Delete This Data ?',
+        'process_confirm' => 'Are You Sure for Process This Data ?',
         'subject_verification_email' => 'Verifcation Email Account',
     ],
     'modal' => [
@@ -51,6 +53,8 @@ return [
         'update_question' => 'Update Question',
         'view_question'   => 'View Question',
         'delete_question' => 'Delete Question',
+        'active' => 'Active',
+        'inactive' => 'Inactive',
     ],
 
 ];

@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Contracts\AdminQuestionCategoryRepository;
 use App\Repositories\Entities\QuestionCategory;
+use App\Repositories\Entities\Question;
 use App\Repositories\Entities\AuditrailLog;
 
 use DB;
@@ -67,6 +68,12 @@ class AdminQuestionCategoryRepositoryEloquent extends BaseRepository implements 
             if($type == 'get-data'){
                 $data = QuestionCategory::find($attributes['id']);
                 $response['category'] = $data->category;
+            }else if($type == 'active'){
+                QuestionCategory::changeIsActive($attributes['id']);
+                $response['notification'] = 'Process Data Success';
+                $response['status'] = 'success';
+                
+                DB::commit();
             }else if($type <> 'delete'){
                 DB::beginTransaction();
                 try{
@@ -79,6 +86,7 @@ class AdminQuestionCategoryRepositoryEloquent extends BaseRepository implements 
                     if($attributes['action'] == 'create'){
                         $data->setAttributesFromJson($attributes);
                         $data->save();
+                        QuestionCategory::changeIsActive($data->id);
                         AuditrailLog::saveData(user_info('email'),'create','question_category',[],$attributes);
                         
                         $response['notification'] = 'Success Create Data';
@@ -145,11 +153,20 @@ class AdminQuestionCategoryRepositoryEloquent extends BaseRepository implements 
         {   
             $datatables = datatables(QuestionCategory::all())
                 ->addColumn('action', function ($data) {
-                    $action = "";
                     $quote = "'";
+                    $question = Question::where('category_id', $data->id)->get()->count();
+                    $actionDelete = '<a onclick="javascript:show_form_delete('.$quote.$data->id.$quote.')" class="btn btn-danger btn-xs actDelete" title="Delete"><i class="fa fa-trash-o fa-fw"></i></a>';
+                    if($question){
+                        $actionDelete = '<a disabled="disabled" class="btn btn-danger btn-xs actDelete" title="Delete"><i class="fa fa-trash-o fa-fw"></i></a>';
+                    }
                     $action = '
                         <a onclick="javascript:show_form_update('.$quote.$data->id.$quote.')" class="btn btn-warning btn-xs" title="Update"><i class="fa fa-pencil-square-o fa-fw"></i></a>
-                        <a onclick="javascript:show_form_delete('.$quote.$data->id.$quote.')" class="btn btn-danger btn-xs actDelete" title="Delete"><i class="fa fa-trash-o fa-fw"></i></a>';
+                        '.$actionDelete;
+                    if($data->is_active){
+                        $action .= ' <a disabled="disabled" class="btn btn-danger btn-xs actDelete" title="Inactive"><i class="fa fa-ban fa-fw"></i></a>';
+                    }else{
+                        $action .= ' <a onclick="javascript:show_form_active('.$quote.$data->id.$quote.')" class="btn btn-info btn-xs actDelete" title="Active"><i class="fa fa-check-circle-o fa-fw"></i></a>';
+                    }
                     
                     return $action;
                 })

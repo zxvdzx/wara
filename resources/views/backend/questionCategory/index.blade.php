@@ -26,7 +26,7 @@
                                 <th class="center-align">{{ trans('general.table.id') }}</th>
                                 <th class="center-align">{{ trans('general.table.update_at') }}</th>
                                 <th class="center-align">{{ trans('general.table.category') }}</th>
-                                <th class="center-align" width="15%">{{ trans('general.table.action') }}</th>
+                                <th class="center-align" width="20%">{{ trans('general.table.action') }}</th>
                             </tr>
                         </thead>
                     </table>
@@ -63,6 +63,11 @@
                             <center>{{ trans('general.messages.delete_confirm') }}</center>
                         </div>
                     </div>
+                    <div class="form-group area-active">
+                        <div class="col-md-12">
+                            <center>{{ trans('general.messages.process_confirm') }}</center>
+                        </div>
+                    </div>
                     <div class="form-group area-insert-update">
                         <center>
                             {!! Form::submit(trans('general.button.save'), ['class' => 'btn btn-primary btn-gradient btn-submit', 'title' => trans('general.button.save')]) !!}&nbsp;&nbsp;&nbsp;
@@ -73,6 +78,12 @@
                     <div class="form-group area-delete">
                         <center>
                             {!! Form::submit(trans('general.button.delete'), ['class' => 'btn btn-danger btn-submit', 'title' => trans('general.button.delete')]) !!}
+                            <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">{{ trans('general.button.cancel') }}</button>
+                        </center>
+                    </div>
+                    <div class="form-group area-active">
+                        <center>
+                            {!! Form::submit(trans('general.button.submit'), ['class' => 'btn btn-primary btn-submit', 'title' => trans('general.button.submit')]) !!}
                             <button class="btn btn-gradient btn-default btn-cancel modal-dismiss" type="button" data-dismiss="modal" aria-label="Close">{{ trans('general.button.cancel') }}</button>
                         </center>
                     </div>
@@ -104,6 +115,7 @@
         $("[name='category']").val('');
         $('.area-insert-update').show();
         $('.area-delete').hide();
+        $('.area-active').hide();
         $('#modalFormData').modal({backdrop: 'static', keyboard: false});
         $('#modalFormData').modal('show');
         $("[name='id']").val('');
@@ -132,6 +144,7 @@
         $("[name='id']").val(id);
         $('.area-insert-update').show();
         $('.area-delete').hide();
+        $('.area-active').hide();
         $('.FormData-title').html("{{ trans('general.modal.update_category') }}");
         $("[name='action']").val('update');
         $('#modalFormData').modal({backdrop: 'static', keyboard: false});
@@ -142,8 +155,31 @@
         $("[name='id']").val(id);
         $('.area-insert-update').hide();
         $('.area-delete').show();
+        $('.area-active').hide();
         $('.FormData-title').html("{{ trans('general.modal.delete_category') }}");
         $("[name='action']").val('delete');
+        $('#modalFormData').modal({backdrop: 'static', keyboard: false});
+        $('#modalFormData').modal('show');
+    }
+    
+    function show_form_active(id){
+        $("[name='id']").val(id);
+        $('.area-insert-update').hide();
+        $('.area-delete').hide();
+        $('.area-active').show();
+        $('.FormData-title').html("{{ trans('general.modal.active') }}");
+        $("[name='action']").val('active');
+        $('#modalFormData').modal({backdrop: 'static', keyboard: false});
+        $('#modalFormData').modal('show');
+    }
+    
+    function show_form_inactive(id){
+        $("[name='id']").val(id);
+        $('.area-insert-update').hide();
+        $('.area-delete').hide();
+        $('.area-active').show();
+        $('.FormData-title').html("{{ trans('general.modal.inactive') }}");
+        $("[name='action']").val('inactive');
         $('#modalFormData').modal({backdrop: 'static', keyboard: false});
         $('#modalFormData').modal('show');
     }
