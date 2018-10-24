@@ -25,7 +25,47 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	.error{
 		color:red;
 	}
+	.carousel{
+	    background: #2f4357;
+	    /*margin-top: 20px;*/
+	}
+	.carousel .item{
+	    min-height: 580px;
+	}
+	.carousel .item img{
+		height:580px;
+	    margin: 0 auto; /* Align slide image horizontally center */
+	}
+	
+	@media(max-width: 766px){
+		.carousel .item{
+		    min-height: 480px;
+		}
+		.carousel .item img{
+			height:480px;
+		    margin: 0 auto; /* Align slide image horizontally center */
+		}
+	}
+	@media(max-width: 670px){
+		.carousel .item{
+		    min-height: 380px;
+		}
+		.carousel .item img{
+			height:380px;
+		    margin: 0 auto; /* Align slide image horizontally center */
+		}
+	}
+	@media(max-width: 616px){
+		.carousel .item{
+		    min-height: 280px;
+		}
+		.carousel .item img{
+			height:280px;
+		    margin: 0 auto; /* Align slide image horizontally center */
+		}
+	}
 </style>
+
 @yield('css')
 </head>
 <body>

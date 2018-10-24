@@ -6,11 +6,46 @@
 <!-- banner -->
 <div class="about-bottom">
     <div class="col-md-6 w3l_about_bottom_left">
-        <div class="video-grid-single-page-agileits">
-            <div data-video="tt2k8PGm-TI" id="video"> <img src="{{ asset($pathp.'assets/frontend/images/waratime.png') }}" alt="about" class="img-responsive" /> </div>
-        </div>
-        <div class="w3l_about_bottom_left_video">
-            <!-- <h4>watch our video</h4> -->
+        <div class="bs-example">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                    <li data-target="#myCarousel" data-slide-to="5"></li>
+                </ol>   
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide1.jpg') }}" alt="First Slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide2.jpg') }}" alt="Second Slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide3.jpg') }}" alt="Third Slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide4.jpg') }}" alt="Third Slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide5.jpg') }}" alt="Third Slide">
+                    </div>
+                    <div class="item">
+                        <img src="{{ asset($pathp.'assets/frontend/images/slide6.jpg') }}" alt="Third Slide">
+                    </div>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
         </div>
     </div>
     <div class="col-md-6 w3l_about_bottom_right one">
