@@ -25,47 +25,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	.error{
 		color:red;
 	}
-	.carousel{
-	    background: #2f4357;
-	    /*margin-top: 20px;*/
-	}
-	.carousel .item{
-	    min-height: 580px;
-	}
-	.carousel .item img{
-		height:580px;
-	    margin: 0 auto; /* Align slide image horizontally center */
-	}
-	
-	@media(max-width: 766px){
-		.carousel .item{
-		    min-height: 480px;
-		}
-		.carousel .item img{
-			height:480px;
-		    margin: 0 auto; /* Align slide image horizontally center */
-		}
-	}
-	@media(max-width: 670px){
-		.carousel .item{
-		    min-height: 380px;
-		}
-		.carousel .item img{
-			height:380px;
-		    margin: 0 auto; /* Align slide image horizontally center */
-		}
-	}
-	@media(max-width: 616px){
-		.carousel .item{
-		    min-height: 280px;
-		}
-		.carousel .item img{
-			height:280px;
-		    margin: 0 auto; /* Align slide image horizontally center */
-		}
+	.center-align{
+		text-align:center;
 	}
 </style>
-
 @yield('css')
 </head>
 <body>
@@ -95,24 +58,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</form>
 			</div> -->
 			<ul class="agile_forms">
-				@if(Sentinel::check())
+                @if(Sentinel::check())
 				    <li><a class="active" href="{{ route('member.logout') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign Out</a> </li>
 				@else
                     <li><a class="active" href="{{ route('member.login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a> </li>
                 @endif
-			</ul>
+            </ul>
 			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 				<nav class="link-effect-2" id="link-effect-2">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{ url('/') }}" class="effect-3">Home</a></li>
-						<li><a href="#about" class="effect-3 scroll">About Us</a></li>
-						<li><a href="#services" class="effect-3 scroll">Services</a></li>
-						<li><a href="#gallery" class="effect-3 scroll">Gallery</a></li>
-						<li><a href="#mail" class="effect-3 scroll">Mail Us</a></li>
-						<li><a href="{{ route('crew') }}" class="effect-3">Crew</a></li>
-						<li><a href="{{ route('exercise') }}" class="effect-3">Exercise</a></li>
+						<li><a href="{{ url('/') }}" class="effect-3">Home</a></li>
+						<li class="active"><a href="{{ route('crew') }}" class="effect-3">Crew</a></li>
 					</ul>
 				</nav>
 
@@ -124,6 +82,20 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 @yield('content')
 
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+   	 	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 style="text-align:center; font-size:25px" id="headerModal"></h4>
+			</div>
+			<div class="modal-body" id="getContentModal">
+				<p id="message" style="color:red; text-align:center; font-size:20px"></p>
+			</div>
+		</div>
+    </div>
+</div>
 <!-- footer -->
 <div class="footer">
 	<div class="container">
@@ -189,6 +161,17 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="{{ asset($pathp.'assets/frontend/js/move-top.js') }}"></script>
 <script type="text/javascript" src="{{ asset($pathp.'assets/frontend/js/easing.js') }}"></script>
 <script type="text/javascript">
+	var code 	 	= $("[name='code']").val();
+	var messages 	= $("[name='messages']").val();
+	var headeModal 	= $("[name='headerm']").val();
+	
+	if(code=="ALERT"){
+		$("#myModal2").modal("show");
+		$("#message").html(messages);
+		$("#headerModal").html(headeModal);
+	}else if(code=="RESULT"){
+		$("#myModal3").modal("show");
+	}
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();

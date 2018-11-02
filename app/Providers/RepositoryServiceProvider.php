@@ -32,6 +32,8 @@ class RepositoryServiceProvider extends ServiceProvider
             'FeDashboard',
             'Form',
             'Exercise',
+            'AdminBanner',
+            'Crew',
         ];
 
         foreach ($models as $model)

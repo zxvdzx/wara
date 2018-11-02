@@ -187,8 +187,6 @@
 
 @include('frontend.gallery')
 
-@include('frontend.team')
-
 @include('frontend.contact')
 
 @endsection

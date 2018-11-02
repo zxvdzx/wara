@@ -1,7 +1,7 @@
-<!-- team -->
-<div class="portfolio-w3ls" id="team">
+<!-- tutor -->
+<div class="portfolio-w3l" id="team">
     <div class="container">
-        <h3 class="w3l-title">Our Team</h3>
+        <h3 class="w3l-title">Our Tutor</h3>
         <div class="w3layouts_header">
             <p><i class="fa fa-graduation-cap" aria-hidden="true"></i></p>
         </div>
@@ -88,4 +88,4 @@
         </div>
     </div>
 </div>
-<!-- //team -->
+<!-- //tutor -->

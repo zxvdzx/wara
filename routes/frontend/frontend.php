@@ -13,6 +13,7 @@
 
 Route::group(['namespace' => 'Frontend'], function () { 
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
+    Route::get('/crew', array('as' => 'crew', 'uses' => 'CrewController@index'));
     Route::post('/contact-us', array('as' => 'contact.us', 'uses' => 'FormController@contactUs'));
     Route::post('/user-register', array('as' => 'user.register', 'uses' => 'FormController@userRegister'));
 });
