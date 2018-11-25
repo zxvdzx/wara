@@ -28,7 +28,7 @@
                 </div>
                 <div class="agile_contact_grid_right agileits_w3layouts_right">
                     <h4>Phone</h4>
-                    <p>+(1236) 2334 232</p><br>
+                    <p>+6285263117996</p><br>
                 </div>
             </div>
             <div class="col-md-4 col-xs-4 w3_agile_contact_grid">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="agile_contact_grid_right agileits_w3layouts_right1">
                     <h4>Email</h4>
-                    <p>info@example2.com</p><br>
+                    <p>waratim3@gmail.com</p><br>
                 </div>
                 <div class="clearfix"> </div>
             </div>

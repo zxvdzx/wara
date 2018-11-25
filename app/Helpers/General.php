@@ -434,13 +434,13 @@ function idr_format($value=0,$type="rp"){
 }
 
 function form_input_file_img($type = "", $name = "" , $url = "", $width = "", $height = "", $class = "", $id = "", $style = "", $alt = "", $title = "", $other = "")
-    {
+{
         $pathp = "";
 
         ((Config::get('app.env') == "local") ? $pathp="" : $pathp="public/" );
 
         if($url == ""){
-            $url = asset($pathp.'assets/frontend/general/img/holder.png');
+            $url = asset($pathp.'assets/backend/img/boxed-bg.jpg');
         }
                     if ($width != "") {
                         $width_img = "width: $width;";
@@ -473,7 +473,7 @@ function form_input_file_img($type = "", $name = "" , $url = "", $width = "", $h
         </div>
         ';
         return $output;
-    }
+}
 
 function form_input_file_image($type = "", $name = "" , $url = "", $width = "", $height = "", $class = "", $id = "", $style = "", $alt = "", $title = "", $other = "")
     {

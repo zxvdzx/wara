@@ -1221,7 +1221,11 @@ text-align:center;
 /*-- //to-top --*/
 
 /*--responsive--*/
-
+@media(max-width: 752px){
+    ul.agile_forms li a {
+        display: none;
+    }
+}
 @media(max-width: 1680px){
 	.w3l_about_bottom_right {
 		padding: 3.5em 3.5em 5.5em;
