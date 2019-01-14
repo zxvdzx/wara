@@ -161,7 +161,7 @@
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
                                 <select name="gender">
                                     <option value"L">Man</option>
-                                    <option value"P">Women</option>
+                                    <option value"P">Woman</option>
                                 </select>
                             </li>
                         </ul>
