@@ -102,8 +102,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<div class="wthree_footer_grid_left">
 			<div class="col-md-6 col-xs-6 wthree_footer_grid_left1">
 				<h4>About Us</h4>
-				<p>Donec viverra nunc eu neque porta, quis laoreet nisl gravida. Proin gravida, 
-					diam ut consectetur porttitor.</p>
+				<p>Media informasi dalam berbagi ilmu dan pengetahuan, serta memfasilitasi program untuk anak bangsa dalam persiapan meraih beasiswa.</p>
 			</div>
 			<!-- <div class="col-md-3 col-xs-3 wthree_footer_grid_left1">
 				
